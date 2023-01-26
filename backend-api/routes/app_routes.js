@@ -1,4 +1,4 @@
-const gachaController = require("../controllers/GachaController.js")
+const gachaController = require("../controllers/gachaController.js")
 
 module.exports = (app) => {
     app.route("/gachas")
