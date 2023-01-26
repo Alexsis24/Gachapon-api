@@ -17,4 +17,9 @@ db.Sequelize = Sequelize
 db.sequelize = sequelize
 db.gachas = require("./models/gacha.model.js")(sequelize,Sequelize)
 
-module.exports = db
+async function Sync(){
+    await sequalize.sync({alter:true}) //alter existing table
+    //                  {force:true} //erase and recreate
+}
+
+module.exports = {db, Sync}
