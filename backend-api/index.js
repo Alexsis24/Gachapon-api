@@ -15,6 +15,20 @@ const pool = mariadb.createPool({
     connectionLimit: 5
 })
 
+app.get("/games",async (req, res)=>{
+    let connection
+    try {
+        connection = await pool.getConnection()
+        const rows = await connection.query("SELECT machineID, name FROM machines")
+        console.log(rows)
+        res.send(rows)
+    } catch (error) {
+        throw error
+    } finally {
+        if (connection) return connection.end()
+    }
+})
+
 app.get("/customers",async (req, res)=>{
     let connection
     try {
