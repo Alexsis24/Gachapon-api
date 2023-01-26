@@ -6,8 +6,8 @@ const swaggerUI = require("swagger-ui-express")
 const swaggerDocument = require("./docs/swagger.json")
 app.use("/docs",swaggerUI.serve,swaggerUI.setup(swaggerDocument))
 
-require("./routes/app_routes")(app)
+require("./routes/app_routes.js")(app)
 
 app.listen(port,()=>{
-    console.log(`API up at: http://localhost${port}`)
+    console.log(`API up at: http://localhost:${port}`)
 })

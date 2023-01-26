@@ -1,7 +1,7 @@
 const gachaController = require("../controllers/GachaController.js")
 
 module.exports = (app) => {
-    app.route("/machines")
+    app.route("/gachas")
         .get(gachaController.getAll)
 /*         .post(gachaController.createNew) //Create
         app.route("/games/:id")
