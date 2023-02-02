@@ -6,7 +6,7 @@ exports.getAll = async (req, res)=>{
     res.send(gachas)
 }
 
-exports.getById = async (req, res)=>{
+/*exports.getById = async (req, res)=>{
     const gachas = await Gacha.findById({attributes:["id"]})
     res.send(gachas)
-}
+}*/
