@@ -6,8 +6,8 @@ exports.getAll = async (req, res)=>{
     res.send(gachas)
 }
 exports.getById = async (req, res)=>{
-    console.log(req.params)
-    res.send(req.params)
+    const gachas = await Gachas.findAll({where: {id: req.params.id}})
+    res.send(gachas)
     //const gachas = await Gachas.findById({where:[id:]})
     //res.send(gachas)
 }
