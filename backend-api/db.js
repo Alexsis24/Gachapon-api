@@ -18,7 +18,7 @@ db.sequelize = sequelize
 db.gachas = require("./models/gacha.model.js")(sequelize,Sequelize)
 
 async function Sync(){
-    await sequalize.sync({alter:true}) //alter existing table
+    await sequelize.sync({alter:true}) //alter existing table
     //                  {force:true} //erase and recreate
 }
 
