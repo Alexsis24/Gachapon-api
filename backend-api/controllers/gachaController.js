@@ -6,7 +6,11 @@ exports.getAll = async (req, res)=>{
     res.send(gachas)
 }
 exports.getById = async (req, res)=>{
-    const gachas = await Gachas.findByPk({where: {id: req.params.id}})
+    const gachas = await Gachas.findByPk(req.params.id)
+    if (gachas === null) {
+        res.status(404).send({"error":"gachapon not found"})
+        return
+    }
     res.send(gachas)
     //const gachas = await Gachas.findById({where:[id:]})
     //res.send(gachas)
