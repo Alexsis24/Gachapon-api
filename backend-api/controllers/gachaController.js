@@ -1,12 +1,13 @@
 const {db} = require("../db")
-const Gacha = db.gachas
+const Gachas = db.gachas
 
 exports.getAll = async (req, res)=>{
-    const gachas = await Gacha.findAll({attributes:["name"]})
+    const gachas = await Gachas.findAll({attributes:["name"]})
     res.send(gachas)
 }
-
-/*exports.getById = async (req, res)=>{
-    const gachas = await Gacha.findById({attributes:["id"]})
-    res.send(gachas)
-}*/
+exports.getById = async (req, res)=>{
+    console.log(req.params)
+    res.send(req.params)
+    //const gachas = await Gachas.findById({where:[id:]})
+    //res.send(gachas)
+}
