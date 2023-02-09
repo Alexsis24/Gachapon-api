@@ -16,6 +16,22 @@ exports.getById = async (req, res)=>{
     //res.send(gachas) delivers
 }
 exports.createNew = async (req,res) =>{
-    console.log(req.body)
-    res.send(req.body)
+    let gacha
+    try {
+        gacha = await Gachas.create(req.body)
+    } catch (error) {
+        if (error instanceof db.Sequelize.ValidationError)
+        {
+            res.status(400).send({"error":error.errors.map((item => item.message))})
+        } else {
+            console.log("GachasCreate: ",error);
+            res.status(500).send({"error":"Something went wrong on our side, a crack team of bughunting kittens has been dispatched :3"})
+        }
+        return
+    }
+    res.status(201).location(`${getBaseUrl(req)}/gachas/${gacha.id}`).json(gacha)
+}
+
+getBaseUrl = (request) => {
+    return (request?.connection?.encrypted ? "https":"http") + `://${request.headers.host}`
 }
