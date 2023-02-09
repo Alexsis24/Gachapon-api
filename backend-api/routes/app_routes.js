@@ -6,6 +6,6 @@ module.exports = (app) => {
         .post(gachaController.createNew) //Create
         app.route("/gachas/:gachasId")
         .get(gachaController.getById) //Read
-        /*.put|(gachaController.updateById) //Update*/
+        .put(gachaController.updateById) //Update
         .delete(gachaController.deleteById) //Delete 
     }

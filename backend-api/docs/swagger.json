@@ -15,6 +15,9 @@
                 ],
                 "responses": {
                     "200": {
+                        "headers": {
+                            "location": {}
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -89,7 +92,7 @@
                         "name": "gachasId",
                         "description": "A unique identifier for a `Gachas`.",
                         "schema": {
-                            "type": "string"
+                            "type": "integer"
                         },
                         "in": "path",
                         "required": true
@@ -97,6 +100,9 @@
                 ],
                 "responses": {
                     "200": {
+                        "headers": {
+                            "location": {}
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -107,6 +113,12 @@
                         "description": "Successful response - returns a single `Gachas`."
                     },
                     "404": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
                         "description": "404 Gacha not found"
                     }
                 },
@@ -126,13 +138,48 @@
                     },
                     "required": true
                 },
+                "parameters": [
+                    {
+                        "name": "gachasId",
+                        "description": "A unique identifier for a `Gachas`.",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
-                    "202": {
-                        "description": "Successful response."
+                    "200": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "Gacha was updated"
+                    },
+                    "404": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "machine not found"
+                    },
+                    "500": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "Internal Server Error"
                     }
                 },
                 "operationId": "updateGachas",
-                "summary": "Update a Gachas",
+                "summary": "Update Gachas",
                 "description": "Updates an existing `Gachas`."
             },
             "delete": {
@@ -149,12 +196,30 @@
                 ],
                 "responses": {
                     "204": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
                         "description": "Successful response."
                     },
                     "404": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
                         "description": "404 Not found"
                     },
                     "500": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
                         "description": "Internal Server Error"
                     }
                 },
@@ -167,7 +232,7 @@
                     "name": "gachasId",
                     "description": "A unique identifier for a `Gachas`.",
                     "schema": {
-                        "type": "string"
+                        "type": "integer"
                     },
                     "in": "path",
                     "required": true

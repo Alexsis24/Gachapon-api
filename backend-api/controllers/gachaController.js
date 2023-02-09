@@ -1,14 +1,15 @@
+const { request } = require("express")
 const {db} = require("../db")
 const Gachas = db.gachas
 
 exports.getAll = async (req, res)=>{
-    const gachas = await Gachas.findAll({attributes:["name"]})
+    const gachas = await Gachas.findAll({attributes:["id","name"]})
     res.send(gachas)
 }
 exports.getById = async (req, res)=>{
-    const gachas = await Gachas.findByPk(req.params.id)
+    const gachas = await Gachas.findByPk(req.params.gachasId)
     if (gachas === null) {
-        res.status(404).send({"error":"Gachapon not found"})
+        res.status(404).send({"error":"Machine not found"})
         return
     }
     res.send(gachas)
@@ -42,10 +43,28 @@ exports.deleteById = async (req, res) => {
         return
     }    
     if (result===0) {
-        res.status(404).send({"error":"Gachapon not found"})
+        res.status(404).send({"error":"Machine not found"})
         return
     }
     res.status(204).send()
+}
+
+exports.updateById = async (req, res) => {
+    let result 
+    delete req.body.id
+    try {
+        result = await Gachas.update(req.body,{ where: { id: req.params.gachasId } })
+    } catch (error) {
+        console.log("GachasUpdate: ",error)
+        res.status(500).send({"error":"Something went wrong on our side, a crack team of bughunting kittens has been dispatched :3"})
+        return
+    }    
+    if (result===0) {
+        res.status(404).send({"error":"Machine not found"})
+        return
+    }
+    const gacha = await Gachas.findByPk(req.params.gachasId)
+    res.status(200).location(`${getBaseUrl(req)}/gachas/${gacha.id}`).json(gacha)
 }
 
 getBaseUrl = (request) => {
