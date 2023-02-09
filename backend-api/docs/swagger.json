@@ -73,6 +73,9 @@
                 "responses": {
                     "200": {
                         "description": "Returns a list of Gacha machines"
+                    },
+                    "201": {
+                        "description": "Adds a new gachapon machine to the database."
                     }
                 }
             }
@@ -81,6 +84,17 @@
             "summary": "Path used to manage a single Gachas.",
             "description": "The REST endpoint/path used to get, update, and delete single instances of an `Gachas`.  This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks, respectively.",
             "get": {
+                "parameters": [
+                    {
+                        "name": "gachasId",
+                        "description": "A unique identifier for a `Gachas`.",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "content": {
@@ -91,6 +105,9 @@
                             }
                         },
                         "description": "Successful response - returns a single `Gachas`."
+                    },
+                    "404": {
+                        "description": "404 Gacha not found"
                     }
                 },
                 "operationId": "getGachas",
@@ -119,9 +136,26 @@
                 "description": "Updates an existing `Gachas`."
             },
             "delete": {
+                "parameters": [
+                    {
+                        "name": "gachasId",
+                        "description": "A unique identifier for a `Gachas`.",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "204": {
                         "description": "Successful response."
+                    },
+                    "404": {
+                        "description": "404 Not found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
                     }
                 },
                 "operationId": "deleteGachas",
@@ -145,7 +179,13 @@
         "schemas": {
             "Gachas": {
                 "description": "",
-                "type": "object"
+                "type": "object",
+                "properties": {
+                    "Id": {
+                        "description": "",
+                        "type": "integer"
+                    }
+                }
             }
         }
     }

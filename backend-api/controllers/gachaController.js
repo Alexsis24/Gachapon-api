@@ -8,7 +8,7 @@ exports.getAll = async (req, res)=>{
 exports.getById = async (req, res)=>{
     const gachas = await Gachas.findByPk(req.params.id)
     if (gachas === null) {
-        res.status(404).send({"error":"gachapon not found"})
+        res.status(404).send({"error":"Gachapon not found"})
         return
     }
     res.send(gachas)
@@ -32,6 +32,22 @@ exports.createNew = async (req,res) =>{
     res.status(201).location(`${getBaseUrl(req)}/gachas/${gacha.id}`).json(gacha)
 }
 
+exports.deleteById = async (req, res) => {
+    let result 
+    try {
+        result = await Gachas.destroy({ where: { id: req.params.gachasId } })
+    } catch (error) {
+        console.log("GachasDelete: ",error)
+        res.status(500).send({"error":"Something went wrong on our side, a crack team of bughunting kittens has been dispatched :3"})
+        return
+    }    
+    if (result===0) {
+        res.status(404).send({"error":"Gachapon not found"})
+        return
+    }
+    res.status(204).send()
+}
+
 getBaseUrl = (request) => {
-    return (request?.connection?.encrypted ? "https":"http") + `://${request.headers.host}`
+    return ((request.connection &&request.connection.encrypted ? "https":"http") + `://${request.headers.host}`)
 }
