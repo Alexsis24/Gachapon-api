@@ -41,14 +41,39 @@
             },
             "post": {
                 "requestBody": {
+                    "description": "",
                     "content": {
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/Gachas"
+                            },
+                            "examples": {
+                                "base": {
+                                    "value": {
+                                        "id": 6,
+                                        "name": "addmachinetest",
+                                        "item1Rarity": 0,
+                                        "item2Rarity": 2,
+                                        "item3Rarity": 0,
+                                        "item4Rarity": 1,
+                                        "item5Rarity": 0,
+                                        "item6Rarity": 1,
+                                        "item7Rarity": 0,
+                                        "item8Rarity": 0,
+                                        "item9Rarity": 0,
+                                        "item10Rarity": 0,
+                                        "gachaAmount": 100
+                                    }
+                                }
                             }
                         }
                     },
                     "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Returns a list of Gacha machines"
+                    }
                 }
             }
         },
