@@ -16,6 +16,6 @@ exports.getById = async (req, res)=>{
     //res.send(gachas) delivers
 }
 exports.createNew = async (req,res) =>{
-    console.log(req.body)
-    res.send(req.body)
+    const gachas = await Gachas.create(req.body)
+    res.send(gachas)
 }
