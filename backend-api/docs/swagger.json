@@ -1,44 +1,127 @@
 {
-  "openapi": "3.0.2",
-  "info": {
-      "title": "GachaMachines-API",
-      "version": "1.0.0",
-      "description": "### This is a Swagger UI for our GachaMachines API"
-  },
-  "paths": {
-      "/gachas": {
-          "summary": "1.0.0",
-          "description": "This is a Swagger UI for our Gachapon machines API",
-          "get": {
-              "tags": [
-                  "machines"
-              ],
-              "responses": {
-                  "200": {
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "type": "array",
-                                  "items": {
-                                      "type": "string"
-                                  }
-                              },
-                              "examples": {
-                                  "List of games": {
-                                      "value": [
-                                          "Plant machine",
-                                          "Candy machine"
-                                      ]
-                                  }
-                              }
-                          }
-                      },
-                      "description": "Returns a list of Gachapon machines."
-                  }
-              },
-              "summary": "Get a list of all Gacha machines",
-              "description": "Returns a list of all Gachapon machines in API"
-          }
-      }
-  }
+    "openapi": "3.0.2",
+    "info": {
+        "title": "GachaMachines-API",
+        "version": "1.0.0",
+        "description": "### This is a Swagger UI for our GachaMachines API"
+    },
+    "paths": {
+        "/gachas": {
+            "summary": "1.0.0",
+            "description": "This is a Swagger UI for our Gachapon machines API",
+            "get": {
+                "tags": [
+                    "machines"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "List of games": {
+                                        "value": [
+                                            "Plant machine",
+                                            "Candy machine"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns a list of Gachapon machines."
+                    }
+                },
+                "summary": "Get a list of all Gacha machines",
+                "description": "Returns a list of all Gachapon machines in API"
+            },
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Gachas"
+                            }
+                        }
+                    },
+                    "required": true
+                }
+            }
+        },
+        "/gachas/{gachasId}": {
+            "summary": "Path used to manage a single Gachas.",
+            "description": "The REST endpoint/path used to get, update, and delete single instances of an `Gachas`.  This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks, respectively.",
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Gachas"
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns a single `Gachas`."
+                    }
+                },
+                "operationId": "getGachas",
+                "summary": "Get a Gachas",
+                "description": "Gets the details of a single instance of a `Gachas`."
+            },
+            "put": {
+                "requestBody": {
+                    "description": "Updated `Gachas` information.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Gachas"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "updateGachas",
+                "summary": "Update a Gachas",
+                "description": "Updates an existing `Gachas`."
+            },
+            "delete": {
+                "responses": {
+                    "204": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "deleteGachas",
+                "summary": "Delete a Gachas",
+                "description": "Deletes an existing `Gachas`."
+            },
+            "parameters": [
+                {
+                    "name": "gachasId",
+                    "description": "A unique identifier for a `Gachas`.",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        }
+    },
+    "components": {
+        "schemas": {
+            "Gachas": {
+                "description": "",
+                "type": "object"
+            }
+        }
+    }
 }

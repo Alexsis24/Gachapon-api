@@ -14,5 +14,8 @@ exports.getById = async (req, res)=>{
     res.send(gachas)
     //const gachas = await Gachas.findById({where:[id:]})
     //res.send(gachas) delivers
-    
+}
+exports.createNew = async (req,res) =>{
+    console.log(req.body)
+    res.send(req.body)
 }
