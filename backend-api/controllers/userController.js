@@ -7,12 +7,12 @@ exports.getAll = async (req, res)=>{
     res.send(users)
 }
 exports.getById = async (req, res)=>{
-    const users = await Users.findByPk(req.params.UserId)
+    const users = await Users.findByPk(req.params.userId)
     if (users === null) {
         res.status(404).send({"error":"User not found"})
         return
     }
-    res.send(users.UserName)
+    res.send(users)
     //const gachas = await Gachas.findById({where:[id:]})
     //res.send(gachas) delivers
 }
@@ -60,7 +60,7 @@ exports.updateById = async (req, res) => {
         return
     }    
     if (result===0) {
-        res.status(404).send({"error":"Machine not found"})
+        res.status(404).send({"error":"User not found"})
         return
     }
     const user = await Users.findByPk(req.params.userId)

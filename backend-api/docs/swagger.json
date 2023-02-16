@@ -317,7 +317,7 @@
                                 }
                             }
                         },
-                        "description": "all good, returning user list\n"
+                        "description": "All good, returning user list\n"
                     },
                     "404": {
                         "headers": {
