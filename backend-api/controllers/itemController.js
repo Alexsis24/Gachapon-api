@@ -20,10 +20,12 @@ exports.createNew = async (req,res) =>{
     let item
     try {
         item = await Items.create(req.body)
+        console.log(item)
     } catch (error) {
         if (error instanceof db.Sequelize.ValidationError)
         {
-            res.status(400).send({"error":error.errors.map((iTem => iTem.message))})
+            console.log(item)
+            res.status(400).send({"error":error.errors.map((x => x.message))})
         } else {
             console.log("ItemsCreate: ",error);
             res.status(500).send({"error":"Something went wrong on our side, a crack team of bughunting kittens has been dispatched :3"})
