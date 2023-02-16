@@ -1,5 +1,5 @@
 const gachaController = require("../controllers/gachaController.js")
-const customerController = require("../controllers/customerController.js")
+const customerController = require("../controllers/userController.js")
 
 module.exports = (app) => {
     app.route("/gachas")

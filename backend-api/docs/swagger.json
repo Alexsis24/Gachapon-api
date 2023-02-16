@@ -25,14 +25,6 @@
                                     "items": {
                                         "type": "string"
                                     }
-                                },
-                                "examples": {
-                                    "List of games": {
-                                        "value": [
-                                            "Plant machine",
-                                            "Candy machine"
-                                        ]
-                                    }
                                 }
                             }
                         },
@@ -43,7 +35,11 @@
                             "location": {}
                         },
                         "content": {
-                            "application/json": {}
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
                         },
                         "description": "Table not found"
                     }
@@ -87,12 +83,33 @@
                 ],
                 "responses": {
                     "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
                         "description": "Returns a list of Gacha machines"
                     },
                     "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
                         "description": "Adds a new gachapon machine to the database."
                     }
-                }
+                },
+                "summary": "Get a list of all Gacha machines"
             }
         },
         "/gachas/{gachasId}": {
@@ -346,9 +363,20 @@
                         "description": "Returns a list of Users"
                     },
                     "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
                         "description": "Adds a new User to the database."
                     }
-                }
+                },
+                "summary": "Get a list of all Users"
             }
         },
         "/users/{userId}": {
