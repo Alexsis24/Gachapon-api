@@ -52,8 +52,10 @@ exports.deleteById = async (req, res) => {
 exports.updateById = async (req, res) => {
     let result 
     delete req.body.id
+    console.log(req.body)
     try {
         result = await Users.update(req.body,{ where: { id: req.params.userId } })
+        console.log(result)
     } catch (error) {
         console.log("UsersDelete: ",error)
         res.status(500).send({"error":"Something went wrong on our side, a crack team of bughunting kittens has been dispatched :3"})
@@ -64,6 +66,7 @@ exports.updateById = async (req, res) => {
         return
     }
     const user = await Users.findByPk(req.params.userId)
+    console.log(user)
     res.status(200).location(`${getBaseUrl(req)}/users/${user.id}`).json(user)
 }
 

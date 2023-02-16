@@ -28,7 +28,7 @@
                                 }
                             }
                         },
-                        "description": "Returns a list of Gachapon machines."
+                        "description": "Added a new Gachapon machine."
                     },
                     "404": {
                         "headers": {
@@ -109,7 +109,7 @@
                         "description": "Adds a new gachapon machine to the database."
                     }
                 },
-                "summary": "Get a list of all Gacha machines"
+                "summary": "Create a new Gacha machine"
             }
         },
         "/gachas/{gachasId}": {
@@ -470,6 +470,24 @@
                             "application/json": {}
                         },
                         "description": "User was updated"
+                    },
+                    "404": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "user not found"
+                    },
+                    "500": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "Internal Server Error"
                     }
                 },
                 "operationId": "updateUsers",
@@ -481,7 +499,7 @@
                     "customers"
                 ],
                 "responses": {
-                    "200": {
+                    "204": {
                         "headers": {
                             "location": {}
                         },
@@ -489,6 +507,24 @@
                             "application/json": {}
                         },
                         "description": "Successful response."
+                    },
+                    "404": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "404 Not found"
+                    },
+                    "500": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "Internal Server Error"
                     }
                 },
                 "operationId": "deleteUser",
@@ -513,7 +549,6 @@
             "Gachas": {
                 "description": "",
                 "required": [
-                    "id",
                     "name",
                     "item1Rarity",
                     "item2Rarity",
@@ -529,10 +564,6 @@
                 ],
                 "type": "object",
                 "properties": {
-                    "id": {
-                        "description": "Id of the Gachapon machine.",
-                        "type": "integer"
-                    },
                     "name": {
                         "description": "Name of the Gachapon machine.",
                         "type": "string"
@@ -599,16 +630,11 @@
             "User": {
                 "description": "",
                 "required": [
-                    "UserId",
                     "UserName",
                     "UserPass"
                 ],
                 "type": "object",
                 "properties": {
-                    "UserId": {
-                        "description": "",
-                        "type": "integer"
-                    },
                     "UserName": {
                         "description": "Username of customer",
                         "type": "string"
