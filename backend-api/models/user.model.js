@@ -1,6 +1,6 @@
 module.exports = (sequelize,Sequelize) => {
-    const Customer = sequelize.define('Customer',{
-        UserId: {
+    const User = sequelize.define('User',{
+        id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
@@ -10,9 +10,9 @@ module.exports = (sequelize,Sequelize) => {
             allowNull: false
         },
         UserPass: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
             allowNull: false
         }
     })
-    return Customer
+    return User
 }
