@@ -43,7 +43,7 @@ exports.deleteById = async (req, res) => {
         return
     }    
     if (result===0) {
-        res.status(404).send({"error":"Machine not found"})
+        res.status(404).send({"error":"User not found"})
         return
     }
     res.status(204).send()
@@ -58,7 +58,7 @@ exports.updateById = async (req, res) => {
         console.log(result)
     } catch (error) {
         console.log("UsersDelete: ",error)
-        res.status(500).send({"error":"Something went wrong on our side, a crack team of bughunting kittens has been dispatched :3"})
+        res.status(500).send({"error":"Something went wrong on our side, a crack team of bughunting kittens has been dispatched :3 meow"})
         return
     }    
     if (result===0) {
