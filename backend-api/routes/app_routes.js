@@ -1,5 +1,5 @@
 const gachaController = require("../controllers/gachaController.js")
-const customerController = require("../controllers/userController.js")
+const userController = require("../controllers/userController.js")
 
 module.exports = (app) => {
     app.route("/gachas")
@@ -11,10 +11,10 @@ module.exports = (app) => {
         .delete(gachaController.deleteById) //Delete 
         
     app.route("/users")
-    .get(customerController.getAll)
-    .post(customerController.createNew) //Create
+    .get(userController.getAll)
+    .post(userController.createNew) //Create
     app.route("/users/:userId")
-    .get(customerController.getById) //Read
-    .put(customerController.updateById) //Update
-    .delete(customerController.deleteById) //Delete 
+    .get(userController.getById) //Read
+    .put(userController.updateById) //Update
+    .delete(userController.deleteById) //Delete 
     }

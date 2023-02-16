@@ -9,10 +9,10 @@ exports.getAll = async (req, res)=>{
 exports.getById = async (req, res)=>{
     const users = await Users.findByPk(req.params.UserId)
     if (users === null) {
-        res.status(404).send({"error":"Machine not found"})
+        res.status(404).send({"error":"User not found"})
         return
     }
-    res.send(users)
+    res.send(users.UserName)
     //const gachas = await Gachas.findById({where:[id:]})
     //res.send(gachas) delivers
 }

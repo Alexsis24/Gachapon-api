@@ -360,6 +360,16 @@
                 ],
                 "responses": {
                     "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
                         "description": "Returns a list of Users"
                     },
                     "201": {
