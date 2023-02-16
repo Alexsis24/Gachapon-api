@@ -37,6 +37,15 @@
                             }
                         },
                         "description": "Returns a list of Gachapon machines."
+                    },
+                    "404": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "Table not found"
                     }
                 },
                 "summary": "Get a list of all Gacha machines",
@@ -73,6 +82,9 @@
                     },
                     "required": true
                 },
+                "tags": [
+                    "machines"
+                ],
                 "responses": {
                     "200": {
                         "description": "Returns a list of Gacha machines"
@@ -84,9 +96,12 @@
             }
         },
         "/gachas/{gachasId}": {
-            "summary": "Path used to manage a single Gachas.",
+            "summary": "Path used to manage single Gachas.",
             "description": "The REST endpoint/path used to get, update, and delete single instances of an `Gachas`.  This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks, respectively.",
             "get": {
+                "tags": [
+                    "machines"
+                ],
                 "parameters": [
                     {
                         "name": "gachasId",
@@ -110,21 +125,29 @@
                                 }
                             }
                         },
-                        "description": "Successful response - returns a single `Gachas`."
+                        "description": "Successful response - returns a given Id `Gachas`."
                     },
                     "404": {
                         "headers": {
-                            "location": {}
+                            "location": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
                         },
                         "content": {
-                            "application/json": {}
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
                         },
-                        "description": "404 Gacha not found"
+                        "description": "404 Gachapon machine not found"
                     }
                 },
-                "operationId": "getGachas",
-                "summary": "Get a Gachas",
-                "description": "Gets the details of a single instance of a `Gachas`."
+                "operationId": "Id",
+                "summary": "Get Gacha machine by ID",
+                "description": "Returs full details of a given Id Gachapon machine"
             },
             "put": {
                 "requestBody": {
@@ -138,6 +161,9 @@
                     },
                     "required": true
                 },
+                "tags": [
+                    "machines"
+                ],
                 "parameters": [
                     {
                         "name": "gachasId",
@@ -180,9 +206,12 @@
                 },
                 "operationId": "updateGachas",
                 "summary": "Update Gachas",
-                "description": "Updates an existing `Gachas`."
+                "description": "Updates an existing `Gacha`."
             },
             "delete": {
+                "tags": [
+                    "machines"
+                ],
                 "parameters": [
                     {
                         "name": "gachasId",
@@ -224,7 +253,7 @@
                     }
                 },
                 "operationId": "deleteGachas",
-                "summary": "Delete a Gachas",
+                "summary": "Delete Gachas",
                 "description": "Deletes an existing `Gachas`."
             },
             "parameters": [
@@ -238,17 +267,310 @@
                     "required": true
                 }
             ]
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "customers"
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "List of users": {
+                                        "value": [
+                                            "User 1",
+                                            "User 2"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "all good, returning user list\n"
+                    },
+                    "404": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Table not found"
+                    }
+                },
+                "summary": "Get a list of all the users",
+                "description": "Returns a list of all users in database"
+            },
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            },
+                            "examples": {
+                                "base": {
+                                    "value": {
+                                        "UserName": "username",
+                                        "UserPass": "password"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "customers"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns a list of Users"
+                    },
+                    "201": {
+                        "description": "Adds a new User to the database."
+                    }
+                }
+            }
+        },
+        "/users/{userId}": {
+            "summary": "Path used to manage single Users.",
+            "description": "The REST endpoint/path used to get, update, and delete single instances of an `User`.  This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks, respectively.",
+            "get": {
+                "tags": [
+                    "customers"
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "description": "A unique identifier for a `User`.",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns a given Id `User`."
+                    },
+                    "404": {
+                        "headers": {
+                            "location": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "description": "404 User not found"
+                    }
+                },
+                "operationId": "UserId",
+                "summary": "Get User by ID",
+                "description": "Returs full details of a given Id User"
+            },
+            "put": {
+                "requestBody": {
+                    "description": "Updated `User` information.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "customers"
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "User was updated"
+                    }
+                },
+                "operationId": "updateUsers",
+                "summary": "Update Users",
+                "description": "Updates an existing `User`."
+            },
+            "delete": {
+                "tags": [
+                    "customers"
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "deleteUser",
+                "summary": "Delete User",
+                "description": "Deletes an existing `User`."
+            },
+            "parameters": [
+                {
+                    "name": "userId",
+                    "description": "A unique identifier for a `User`.",
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
         }
     },
     "components": {
         "schemas": {
             "Gachas": {
                 "description": "",
+                "required": [
+                    "id",
+                    "name",
+                    "item1Rarity",
+                    "item2Rarity",
+                    "item3Rarity",
+                    "item4Rarity",
+                    "item5Rarity",
+                    "item6Rarity",
+                    "item7Rarity",
+                    "item8Rarity",
+                    "item9Rarity",
+                    "item10Rarity",
+                    "gachaAmount"
+                ],
                 "type": "object",
                 "properties": {
-                    "Id": {
+                    "id": {
+                        "description": "Id of the Gachapon machine.",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Name of the Gachapon machine.",
+                        "type": "string"
+                    },
+                    "item1Rarity": {
+                        "description": "Rarity randomizer slot 1 with its assosiated rarity collection of items.",
+                        "type": "integer"
+                    },
+                    "item2Rarity": {
+                        "description": "Rarity randomizer slot 2 with its assosiated rarity collection of items.",
+                        "type": "integer"
+                    },
+                    "item3Rarity": {
+                        "description": "Rarity randomizer slot 3 with its assosiated rarity collection of items.",
+                        "type": "integer"
+                    },
+                    "item4Rarity": {
+                        "description": "Rarity randomizer slot 4 with its assosiated rarity collection of items.",
+                        "type": "integer"
+                    },
+                    "item5Rarity": {
+                        "description": "Rarity randomizer slot 5 with its assosiated rarity collection of items.",
+                        "type": "integer"
+                    },
+                    "item6Rarity": {
+                        "description": "Rarity randomizer slot 6 with its assosiated rarity collection of items.",
+                        "type": "integer"
+                    },
+                    "item7Rarity": {
+                        "description": "Rarity randomizer slot 7 with its assosiated rarity collection of items.",
+                        "type": "integer"
+                    },
+                    "item8Rarity": {
+                        "description": "Rarity randomizer slot 8 with its assosiated rarity collection of items.",
+                        "type": "integer"
+                    },
+                    "item9Rarity": {
+                        "description": "Rarity randomizer slot 9 with its assosiated rarity collection of items.",
+                        "type": "integer"
+                    },
+                    "item10Rarity": {
+                        "description": "Rarity randomizer slot 10 with its assosiated rarity collection of items.",
+                        "type": "integer"
+                    },
+                    "gachaAmount": {
+                        "description": "Shows how many items are left in the Gachapon machine.",
+                        "type": "integer"
+                    }
+                }
+            },
+            "error": {
+                "title": "Root Type for error",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "error": "Error message."
+                }
+            },
+            "User": {
+                "description": "",
+                "required": [
+                    "UserId",
+                    "UserName",
+                    "UserPass"
+                ],
+                "type": "object",
+                "properties": {
+                    "UserId": {
                         "description": "",
                         "type": "integer"
+                    },
+                    "UserName": {
+                        "description": "Username of customer",
+                        "type": "string"
+                    },
+                    "UserPass": {
+                        "description": "Password of the customer",
+                        "type": "string"
                     }
                 }
             }

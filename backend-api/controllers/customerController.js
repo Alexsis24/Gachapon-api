@@ -1,18 +1,18 @@
 const { request } = require("express")
 const {db} = require("../db")
-const Customers = db.customers
+const Users = db.users
 
 exports.getAll = async (req, res)=>{
-    const customers = await Customers.findAll({attributes:["id","userName","userPass"]})
-    res.send(customers)
+    const users = await Users.findAll({attributes:["id","userName","userPass"]})
+    res.send(users)
 }
 exports.getById = async (req, res)=>{
-    const customers = await Customers.findByPk(req.params.userId)
-    if (customers === null) {
+    const users = await Users.findByPk(req.params.UserId)
+    if (users === null) {
         res.status(404).send({"error":"Machine not found"})
         return
     }
-    res.send(customers)
+    res.send(users)
     //const gachas = await Gachas.findById({where:[id:]})
     //res.send(gachas) delivers
 }
@@ -25,12 +25,12 @@ exports.createNew = async (req,res) =>{
         {
             res.status(400).send({"error":error.errors.map((item => item.message))})
         } else {
-            console.log("GachasCreate: ",error);
+            console.log("UsersCreate: ",error);
             res.status(500).send({"error":"Something went wrong on our side, a crack team of bughunting kittens has been dispatched :3"})
         }
         return
     }
-    res.status(201).location(`${getBaseUrl(req)}/gachas/${user.id}`).json(user)
+    res.status(201).location(`${getBaseUrl(req)}/users/${user.id}`).json(user)
 }
 
 exports.deleteById = async (req, res) => {
@@ -38,7 +38,7 @@ exports.deleteById = async (req, res) => {
     try {
         result = await Users.destroy({ where: { id: req.params.userId } })
     } catch (error) {
-        console.log("GachasDelete: ",error)
+        console.log("UsersDelete: ",error)
         res.status(500).send({"error":"Something went wrong on our side, a crack team of bughunting kittens has been dispatched :3"})
         return
     }    
@@ -55,7 +55,7 @@ exports.updateById = async (req, res) => {
     try {
         result = await Users.update(req.body,{ where: { id: req.params.userId } })
     } catch (error) {
-        console.log("GachasUpdate: ",error)
+        console.log("UsersDelete: ",error)
         res.status(500).send({"error":"Something went wrong on our side, a crack team of bughunting kittens has been dispatched :3"})
         return
     }    
@@ -63,8 +63,8 @@ exports.updateById = async (req, res) => {
         res.status(404).send({"error":"Machine not found"})
         return
     }
-    const user = await Gachas.findByPk(req.params.userId)
-    res.status(200).location(`${getBaseUrl(req)}/gachas/${gacha.id}`).json(gacha)
+    const user = await Users.findByPk(req.params.userId)
+    res.status(200).location(`${getBaseUrl(req)}/users/${user.id}`).json(user)
 }
 
 getBaseUrl = (request) => {
