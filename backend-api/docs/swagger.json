@@ -121,7 +121,10 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Gachas"
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
                                 }
                             }
                         },
@@ -269,6 +272,7 @@
             ]
         },
         "/users": {
+            "description": "This is a Swagger UI for our Users API",
             "get": {
                 "tags": [
                     "customers"
@@ -373,7 +377,10 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/User"
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
                                 }
                             }
                         },
