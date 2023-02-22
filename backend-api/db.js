@@ -17,6 +17,8 @@ db.Sequelize = Sequelize
 db.sequelize = sequelize
 db.gachas = require("./models/gacha.model.js")(sequelize,Sequelize)
 db.users = require("./models/user.model.js")(sequelize,Sequelize)
+db.items = require("./models/item.model.js")(sequelize,Sequelize)
+db.ownerships = require("./models/ownership.model.js")(sequelize,Sequelize)
 
 async function Sync(){
     await sequelize.sync({alter:true}) //alter existing table

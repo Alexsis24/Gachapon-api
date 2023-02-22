@@ -32,7 +32,11 @@
                     },
                     "404": {
                         "headers": {
-                            "location": {}
+                            "location": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
                         },
                         "content": {
                             "application/json": {
@@ -49,7 +53,7 @@
             },
             "post": {
                 "requestBody": {
-                    "description": "",
+                    "description": "A new Gacha machine to be created.",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -478,7 +482,7 @@
                         "content": {
                             "application/json": {}
                         },
-                        "description": "user not found"
+                        "description": "User not found"
                     },
                     "500": {
                         "headers": {
@@ -542,6 +546,509 @@
                     "required": true
                 }
             ]
+        },
+        "/items": {
+            "summary": "Path used to manage the list of items.",
+            "description": "The REST endpoint/path used to list and create zero or more `Item` entities.  This path contains a `GET` and `POST` operation to perform the list and create tasks, respectively.",
+            "get": {
+                "tags": [
+                    "items"
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns all Items"
+                    },
+                    "404": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Table not found"
+                    }
+                },
+                "operationId": "getItems",
+                "summary": "Get a list of all Items",
+                "description": "Gets a list of all `Item`"
+            },
+            "post": {
+                "requestBody": {
+                    "description": "A new `Item` to be created.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Item"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "items"
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns a list of all Items"
+                    },
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Adds a new item to the database."
+                    }
+                },
+                "operationId": "createItem",
+                "summary": "Create a Item",
+                "description": "Creates a new instance of a `Item`."
+            }
+        },
+        "/items/{itemId}": {
+            "summary": "Path used to manage a single Item.",
+            "description": "The REST endpoint/path used to get, update, and delete single instances of an `Item`.  This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks, respectively.",
+            "get": {
+                "tags": [
+                    "items"
+                ],
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "description": "A unique identifier for a `Item`.",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns a single `Item`."
+                    },
+                    "404": {
+                        "headers": {
+                            "location": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "description": "Item not found"
+                    }
+                },
+                "operationId": "itemID",
+                "summary": "Get a Item by ID",
+                "description": "Gets the details of a single instance of a `Item`."
+            },
+            "put": {
+                "requestBody": {
+                    "description": "Updated `Item` information.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Item"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "items"
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "Item was updated"
+                    },
+                    "404": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "Item not found"
+                    },
+                    "500": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "Internal Server Error"
+                    }
+                },
+                "operationId": "updateItem",
+                "summary": "Update Item",
+                "description": "Updates an existing `Item`."
+            },
+            "delete": {
+                "tags": [
+                    "items"
+                ],
+                "responses": {
+                    "204": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "Successful response."
+                    },
+                    "404": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "404 not found"
+                    },
+                    "500": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "Internal Server Error"
+                    }
+                },
+                "operationId": "deleteItem",
+                "summary": "Delete a Item",
+                "description": "Deletes an existing `Item`."
+            },
+            "parameters": [
+                {
+                    "name": "itemId",
+                    "description": "A unique identifier for a `Item`.",
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/ownerships": {
+            "summary": "Path used to manage the list of ownerships.",
+            "description": "The REST endpoint/path used to list and create zero or more `Ownership` entities.  This path contains a `GET` and `POST` operation to perform the list and create tasks, respectively.",
+            "get": {
+                "tags": [
+                    "ownership"
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns an array of `Ownership` entities."
+                    },
+                    "404": {
+                        "headers": {
+                            "location": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Table not found"
+                    }
+                },
+                "operationId": "getOwnerships",
+                "summary": "List All Ownerships",
+                "description": "Gets a list of all `Ownership` entities."
+            },
+            "post": {
+                "requestBody": {
+                    "description": "A new `Ownership` to be created.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Ownership"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "ownership"
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Adds ownership details to the database."
+                    }
+                },
+                "operationId": "createOwnership",
+                "summary": "Create a Ownership",
+                "description": "Creates a new instance of a `Ownership`."
+            }
+        },
+        "/ownerships/{ownershipId}": {
+            "summary": "Path used to manage a single Ownership.",
+            "description": "The REST endpoint/path used to get, update, and delete single instances of an `Ownership`.  This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks, respectively.",
+            "get": {
+                "tags": [
+                    "ownership"
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns a single `Ownership`."
+                    },
+                    "404": {
+                        "headers": {
+                            "location": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "description": "Ownership Id not found"
+                    }
+                },
+                "operationId": "getOwnership",
+                "summary": "Get a Ownership",
+                "description": "Gets the details of a single instance of a `Ownership`."
+            },
+            "put": {
+                "requestBody": {
+                    "description": "Updated `Ownership` information.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Ownership"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "ownership"
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "Ownership was updated"
+                    },
+                    "404": {
+                        "headers": {
+                            "location": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "description": "Ownership not found"
+                    },
+                    "500": {
+                        "headers": {
+                            "location": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "description": "Internal Server Error"
+                    }
+                },
+                "operationId": "updateOwnership",
+                "summary": "Update a Ownership",
+                "description": "Updates an existing `Ownership`."
+            },
+            "delete": {
+                "tags": [
+                    "ownership"
+                ],
+                "responses": {
+                    "204": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "Successful response."
+                    },
+                    "404": {
+                        "headers": {
+                            "location": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "description": "404 Not found"
+                    },
+                    "500": {
+                        "headers": {
+                            "location": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "description": "Internal Server Error"
+                    }
+                },
+                "operationId": "deleteOwnership",
+                "summary": "Delete a Ownership",
+                "description": "Deletes an existing `Ownership`."
+            },
+            "parameters": [
+                {
+                    "name": "ownershipId",
+                    "description": "A unique identifier for a `Ownership`.",
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
         }
     },
     "components": {
@@ -570,7 +1077,8 @@
                     },
                     "item1Rarity": {
                         "description": "Rarity randomizer slot 1 with its assosiated rarity collection of items.",
-                        "type": "integer"
+                        "type": "integer",
+                        "example": "[\n    \"rarity\"=== 1\n]"
                     },
                     "item2Rarity": {
                         "description": "Rarity randomizer slot 2 with its assosiated rarity collection of items.",
@@ -642,6 +1150,48 @@
                     "UserPass": {
                         "description": "Password of the customer",
                         "type": "string"
+                    }
+                }
+            },
+            "Item": {
+                "description": "Gachapon machines item",
+                "required": [
+                    "ItemName",
+                    "ItemDescription",
+                    "ItemImageLink",
+                    "ItemSupply"
+                ],
+                "type": "object",
+                "properties": {
+                    "ItemDescription": {
+                        "description": "Description of the item",
+                        "type": "string"
+                    },
+                    "ItemImageLink": {
+                        "description": "Link to the picture of the item",
+                        "type": "string"
+                    },
+                    "ItemName": {
+                        "description": "Name of the item",
+                        "type": "string"
+                    },
+                    "ItemSupply": {
+                        "description": "Supply of the item",
+                        "type": "integer"
+                    }
+                }
+            },
+            "Ownership": {
+                "description": "Shows items user owns and it's ammount",
+                "type": "object",
+                "properties": {
+                    "OwnershipUserId": {
+                        "description": "FK of the users id",
+                        "type": "integer"
+                    },
+                    "OwnershipItemId": {
+                        "description": "FK of the items id",
+                        "type": "integer"
                     }
                 }
             }
