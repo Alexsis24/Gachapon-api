@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+        html, body {
+            height: 100%
+        }
+        button {
+            display: grid;
+            place-items: center;
+        }
+        
+    </style>
+</head>
+<body>
+    hello world
+    <div id="app">
+        <p>
+            <input type="text" v-model="greeting">
+        </p>
+        <p>
+            {{greeting}} ({{greeting.length}})
+        </p>
+        <p>
+
+        </p>
+    </div>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    greeting: "H E L L O   W O R L D from vue"
+                }
+            },
+            mounted() {
+                setTimeout(()=> {
+                    this.greeting = "changed"
+                }, 3000)
+            },
+        }).mount("#app")
+    </script>
+</body>
+</html>
