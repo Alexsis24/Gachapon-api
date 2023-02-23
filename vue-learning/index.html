@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         html, body {
             height: 100%;
@@ -33,10 +34,20 @@
         </p>
         <div class="button">
             <p>
+                <!-- //<button :class="active ? 'text-red':'text-green'" @click="toggle">KLIKKA MEJ</button> -->
                 <button v-bind:class="active ? 'text-red':'text-green'" v-on:click="toggle">KLIKKA MEJ</button>
             </p>
         </div>
-
+        <section>
+            <h2 class="font-bold mb-2">
+                Assignments
+            </h2>
+            <ul>
+                <li>Finish project <input type="checkbox"></li>
+                <li>Read chapter 4 <input type="checkbox"></li>
+                <li>Turn in homework <input type="checkbox"></li>
+            </ul>
+        </section>
     </div>
     <script>
         Vue.createApp({
@@ -45,6 +56,11 @@
                     greeting: "H E L L O   W O R L D from vue",
                     buttonClasses: "text-green",
                     active: false
+                    assignments: [
+                        {name: 'Finish project', complete: false},
+                        {name: 'Read chapter 4', complete: false},
+                        {name: 'Turn in homework', complete: false}
+                    ]
                 }
             },
             mounted() {
@@ -55,8 +71,7 @@
             methods: {
                 toggle() {
                     //this.buttonClasses = "text-red"
-                    this.active = !this.active;
-                    
+                    this.active = !this.active;                    
                 }
             }
         }).mount("#app")
