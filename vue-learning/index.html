@@ -10,11 +10,16 @@
         html, body {
             height: 100%;
         }
-        button {
+        .button {
             display: grid;
             place-items: center;
         }
-
+        .text-green {
+            color: green;
+        }
+        .text-red {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -26,15 +31,20 @@
         <p>
             {{greeting}} ({{greeting.length}})
         </p>
-        <p>
+        <div class="button">
+            <p>
+                <button v-bind:class="active ? 'text-red':'text-green'" v-on:click="toggle">KLIKKA MEJ</button>
+            </p>
+        </div>
 
-        </p>
     </div>
     <script>
         Vue.createApp({
             data() {
                 return {
-                    greeting: "H E L L O   W O R L D from vue"
+                    greeting: "H E L L O   W O R L D from vue",
+                    buttonClasses: "text-green",
+                    active: false
                 }
             },
             mounted() {
@@ -42,6 +52,13 @@
                     this.greeting = "changed"
                 }, 3000)
             },
+            methods: {
+                toggle() {
+                    //this.buttonClasses = "text-red"
+                    this.active = !this.active;
+                    
+                }
+            }
         }).mount("#app")
     </script>
 </body>
