@@ -1,6 +1,7 @@
 const gachaController = require("../controllers/gachaController.js")
 const userController = require("../controllers/userController.js")
 const itemController = require("../controllers/itemController.js")
+const ownershipController = require("../controllers/ownershipController.js")
 
 module.exports = (app) => {
     app.route("/gachas")
@@ -28,11 +29,11 @@ module.exports = (app) => {
         .delete(itemController.deleteById) //Delete 
     ////////////////////////////////
     app.route("/ownerships")
-        .get(ownershipsController.getAll)
-        .post(ownershipsController.createNew) //Create
+        .get(ownershipController.getAll)
+        .post(ownershipController.createNew) //Create
     app.route("/ownerships/:ownershipId")
-        .get(ownershipsController.getById) //Read
-        .put(ownershipsController.updateById) //Update
-        .delete(ownershipsController.deleteById) //Delete
+        .get(ownershipController.getById) //Read
+        .put(ownershipController.updateById) //Update
+        .delete(ownershipController.deleteById) //Delete
 
 }

@@ -1,8 +1,8 @@
 const { request } = require("express")
 const {db} = require("../db")
 const Ownership = db.ownerships
-const User = db.users
-const Item = db.items
+const user = db.users
+const item = db.items
 
 exports.getAll = async (req, res)=>{
     const ownerships = await Ownership.findAll({attributes:["id","OwnershipUserId","OwnershipItemId","Ownership"]})
@@ -22,7 +22,7 @@ exports.createNew = async (req,res) =>{
     console.log("New Ownership: ",req.body)
     let ownership
     try {
-        ownership = await Ownerships.create(req.body,
+        ownership = await Ownership.create(req.body,
             {
                 logging: console.log,
                 include: [ item, user ]
@@ -46,7 +46,7 @@ exports.createNew = async (req,res) =>{
 exports.deleteById = async (req, res) => {
     let result 
     try {
-        result = await Ownerships.destroy({ where: { id: req.params.ownershipId } })
+        result = await Ownership.destroy({ where: { id: req.params.ownershipId } })
     } catch (error) {
         console.log("OwnershipsDelete: ",error)
         res.status(500).send({"error":"Something went wrong on our side, a crack team of bughunting kittens has been dispatched :3"})
@@ -64,7 +64,7 @@ exports.updateById = async (req, res) => {
     delete req.body.id
     console.log(req.body)
     try {
-        result = await Ownerships.update(req.body,{ where: { id: req.params.ownershipId } })
+        result = await Ownership.update(req.body,{ where: { id: req.params.ownershipId } })
         console.log(result)
     } catch (error) {
         console.log("OwnershipsDelete: ",error)
@@ -75,7 +75,7 @@ exports.updateById = async (req, res) => {
         res.status(404).send({"error":"Ownership not found"})
         return
     }
-    const ownership = await Ownerships.findByPk(req.params.ownershipId)
+    const ownership = await Ownership.findByPk(req.params.ownershipId)
     console.log(ownership)
     res.status(200).location(`${getBaseUrl(req)}/ownerships/${Ownership.id}`).json(ownership)
 }

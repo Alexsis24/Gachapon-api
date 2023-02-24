@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize, Item, User) =>{
+module.exports = (sequelize, Sequelize, item, user) =>{
     const Ownership = sequelize.define("Ownership", {
         id : {
             type: Sequelize.INTEGER,
@@ -10,7 +10,7 @@ module.exports = (sequelize, Sequelize, Item, User) =>{
         OwnershipUserId : {
             type: Sequelize.INTEGER,
             references:{
-                model: User,
+                model: user,
                 key: "id",
             },
         },
@@ -18,7 +18,7 @@ module.exports = (sequelize, Sequelize, Item, User) =>{
         OwnershipItemId : {
             type: Sequelize.INTEGER,
             references:{
-                model: Item,
+                model: item,
                 key: "id",
             },
         },
@@ -29,11 +29,11 @@ module.exports = (sequelize, Sequelize, Item, User) =>{
             defaultValue: 0
         },        
     })
-    Item.belongsToMany(User, { through: Ownership })
-    User.belongsToMany(Item, { through: Ownership })
-    Item.hasMany(Ownership)
-    Ownership.belongsTo(Item)
-    User.hasMany(Ownership)
-    Ownership.belongsTo(User)
+    item.belongsToMany(user, { through: Ownership })
+    user.belongsToMany(item, { through: Ownership })
+    item.hasMany(Ownership)
+    Ownership.belongsTo(item)
+    user.hasMany(Ownership)
+    Ownership.belongsTo(user)
     return Ownership
 }
