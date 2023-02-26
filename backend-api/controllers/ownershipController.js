@@ -1,15 +1,15 @@
 const { request } = require("express")
 const {db} = require("../db")
-const Ownership = db.ownerships
-const user = db.users
-const item = db.items
+const Ownerships = db.ownerships
+const User = db.users
+const Item = db.items
 
 exports.getAll = async (req, res)=>{
-    const ownerships = await Ownership.findAll({attributes:["id","OwnershipUserId","OwnershipItemId","Amount"]})
+    const ownerships = await Ownerships.findAll({attributes:["id","OwnershipUserId","OwnershipItemId","Amount"]})
     res.send(ownerships)
 }
 exports.getById = async (req, res)=>{
-    const ownerships = await Ownership.findByPk(req.params.ownershipId)
+    const ownerships = await Ownerships.findByPk(req.params.ownershipId)
     if (ownerships === null) {
         res.status(404).send({"error":"Ownership not found"})
         return
@@ -20,17 +20,17 @@ exports.getById = async (req, res)=>{
 }
 exports.createNew = async (req,res) =>{
     console.log("New Ownership: ",req.body)
-    let ownership
+    let ownerships
     try {
-        ownership = await Ownership.create(req.body,
+        ownerships = await Ownerships.create(req.body,
             {
                 logging: console.log,
-                include: [ item, user ]
+                include: [ Item, User ]
             })    
         } catch (error) {
             if (error instanceof db.Sequelize.ValidationError)
             {
-                console.log(ownership)
+                console.log(ownerships)
                 res.status(400).send({"error":error.errors.map((x => x.message))})
             } else if (error instanceof db.Sequelize.ForeignKeyConstraintError){
                 res.status(400).send({"error":`Table:${error.table} does not contain row with id:${error.value}`})
@@ -40,13 +40,13 @@ exports.createNew = async (req,res) =>{
             }
             return
     }
-    res.status(201).location(`${getBaseUrl(req)}/ownerships/${ownership.id}`).json(ownership)
+    res.status(201).location(`${getBaseUrl(req)}/ownership/${Ownerships.id}`).json(ownerships)
 }
 
 exports.deleteById = async (req, res) => {
     let result 
     try {
-        result = await Ownership.destroy({ where: { id: req.params.ownershipId } })
+        result = await Ownerships.destroy({ where: { id: req.params.ownershipId } })
     } catch (error) {
         console.log("OwnershipsDelete: ",error)
         res.status(500).send({"error":"Something went wrong on our side, a crack team of bughunting kittens has been dispatched :3"})
@@ -64,7 +64,7 @@ exports.updateById = async (req, res) => {
     delete req.body.id
     console.log(req.body)
     try {
-        result = await Ownership.update(req.body,{ where: { id: req.params.ownershipId } })
+        result = await Ownerships.update(req.body,{ where: { id: req.params.ownershipId } })
         console.log(result)
     } catch (error) {
         console.log("OwnershipsDelete: ",error)
@@ -75,9 +75,9 @@ exports.updateById = async (req, res) => {
         res.status(404).send({"error":"Ownership not found"})
         return
     }
-    const ownership = await Ownership.findByPk(req.params.ownershipId)
-    console.log(ownership)
-    res.status(200).location(`${getBaseUrl(req)}/ownerships/${Ownership.id}`).json(ownership)
+    const ownerships = await Ownerships.findByPk(req.params.ownershipId)
+    console.log(ownerships)
+    res.status(200).location(`${getBaseUrl(req)}/ownerships/${Ownerships.id}`).json(ownerships)
 }
 
 getBaseUrl = (request) => {

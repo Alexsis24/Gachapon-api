@@ -1328,6 +1328,9 @@
             },
             "Ownership": {
                 "description": "Shows items user owns and it's ammount",
+                "required": [
+                    "Amount"
+                ],
                 "type": "object",
                 "properties": {
                     "OwnershipUserId": {
@@ -1336,6 +1339,10 @@
                     },
                     "OwnershipItemId": {
                         "description": "FK of the items id",
+                        "type": "integer"
+                    },
+                    "Amount": {
+                        "description": "Amount of items owned by user",
                         "type": "integer"
                     }
                 }
