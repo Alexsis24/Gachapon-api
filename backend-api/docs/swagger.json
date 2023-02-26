@@ -390,7 +390,7 @@
                         "description": "Adds a new User to the database."
                     }
                 },
-                "summary": "Get a list of all Users"
+                "summary": "Add User"
             }
         },
         "/users/{userId}": {
@@ -918,7 +918,7 @@
                     }
                 },
                 "operationId": "getOwnership",
-                "summary": "Get a Ownership",
+                "summary": "Get a Ownership by ID",
                 "description": "Gets the details of a single instance of a `Ownership`."
             },
             "put": {
