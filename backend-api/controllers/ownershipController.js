@@ -5,7 +5,7 @@ const user = db.users
 const item = db.items
 
 exports.getAll = async (req, res)=>{
-    const ownerships = await Ownership.findAll({attributes:["id","OwnershipUserId","OwnershipItemId","Ownership"]})
+    const ownerships = await Ownership.findAll({attributes:["id","OwnershipUserId","OwnershipItemId","Amount"]})
     res.send(ownerships)
 }
 exports.getById = async (req, res)=>{
