@@ -9,7 +9,7 @@ exports.getAll = async (req, res)=>{
     res.send(ownerships)
 }
 exports.getById = async (req, res)=>{
-    const ownerships = await Ownership.findByPk(req.params.ownershipId)
+    const ownerships = await Ownership.findByPk(req.params.id)
     if (ownerships === null) {
         res.status(404).send({"error":"Ownership not found"})
         return
@@ -46,7 +46,7 @@ exports.createNew = async (req,res) =>{
 exports.deleteById = async (req, res) => {
     let result 
     try {
-        result = await Ownership.destroy({ where: { id: req.params.ownershipId } })
+        result = await Ownership.destroy({ where: { id: req.params.id } })
     } catch (error) {
         console.log("OwnershipsDelete: ",error)
         res.status(500).send({"error":"Something went wrong on our side, a crack team of bughunting kittens has been dispatched :3"})
@@ -64,7 +64,7 @@ exports.updateById = async (req, res) => {
     delete req.body.id
     console.log(req.body)
     try {
-        result = await Ownership.update(req.body,{ where: { id: req.params.ownershipId } })
+        result = await Ownership.update(req.body,{ where: { id: req.params.id } })
         console.log(result)
     } catch (error) {
         console.log("OwnershipsDelete: ",error)
@@ -75,7 +75,7 @@ exports.updateById = async (req, res) => {
         res.status(404).send({"error":"Ownership not found"})
         return
     }
-    const ownership = await Ownership.findByPk(req.params.ownershipId)
+    const ownership = await Ownership.findByPk(req.params.id)
     console.log(ownership)
     res.status(200).location(`${getBaseUrl(req)}/ownerships/${Ownership.id}`).json(ownership)
 }
