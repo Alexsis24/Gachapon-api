@@ -9,14 +9,13 @@ exports.getAll = async (req, res)=>{
     res.send(ownerships)
 }
 exports.getById = async (req, res)=>{
-    const ownerships = await Ownerships.findByPk(req.params.ownershipId)
-    if (ownerships === null) {
+    const Ownership = await Ownerships.findByPk(req.params.ownershipId)
+    if (Ownership === null) {
         res.status(404).send({"error":"Ownership not found"})
         return
     }
-    res.send(ownerships)
-    //const gachas = await Gachas.findById({where:[id:]})
-    //res.send(gachas) delivers
+    res.send(Ownership)
+    
 }
 exports.createNew = async (req,res) =>{
     console.log("New Ownership: ",req.body)
@@ -75,9 +74,9 @@ exports.updateById = async (req, res) => {
         res.status(404).send({"error":"Ownership not found"})
         return
     }
-    const ownerships = await Ownerships.findByPk(req.params.ownershipId)
-    console.log(ownerships)
-    res.status(200).location(`${getBaseUrl(req)}/ownerships/${Ownerships.id}`).json(ownerships)
+    const Ownership = await Ownerships.findByPk(req.params.ownershipId)
+    console.log(Ownership)
+    res.status(200).location(`${getBaseUrl(req)}/ownerships/${Ownerships.id}`).json(Ownership)
 }
 
 getBaseUrl = (request) => {
