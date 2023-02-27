@@ -6,23 +6,20 @@ module.exports = (sequelize, Sequelize, Item, User) =>{
             autoIncrement: true,
             allowNull: false
         },
-
-        OwnershipUserId : {
+        UserId : {
             type: Sequelize.INTEGER,
             references:{
                 model: User,
                 key: "id",
             },
         },
-
-        OwnershipItemId : {
+        ItemId : {
             type: Sequelize.INTEGER,
             references:{
                 model: Item,
                 key: "id",
             },
-        },
-        
+        },        
         Amount :{
             type: Sequelize.INTEGER,
             allowNull: false,
