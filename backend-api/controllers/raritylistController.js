@@ -11,7 +11,7 @@ exports.getAll = async (req, res)=>{
 exports.getById = async (req, res)=>{
     const RarityList = await RarityLists.findByPk(req.params.raritylistId)
     if (RarityList === null) {
-        res.status(404).send({"error":"Ownership not found"})
+        res.status(404).send({"error":"RarityList not found"})
         return
     }
     res.send(RarityList)
@@ -66,7 +66,7 @@ exports.updateById = async (req, res) => {
         result = await RarityLists.update(req.body,{ where: { id: req.params.raritylistId } })
         console.log(result)
     } catch (error) {
-        console.log("OwnershipsDelete: ",error)
+        console.log("RarityListsDelete: ",error)
         res.status(500).send({"error":"Something went wrong on our side, a crack team of bughunting kittens has been dispatched :3 meow"})
         return
     }    
