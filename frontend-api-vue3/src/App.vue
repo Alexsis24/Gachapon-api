@@ -10,7 +10,7 @@
       </tr>
       <tr v-for="gacha in gachas" :key="gacha.id">
         <td>{{ gacha.name }}</td>
-        <td><button @click="$event => showModal = true">Kuva Detailid</button></td>
+        <td><button @click=" gachaDetailId = gacha.id">Kuva Detailid</button></td>
       </tr>
     </table>
   </div>
@@ -52,11 +52,18 @@ export default {
         {id:1,name:"testgachamachineforvue"},
     {id:2,name:"anothertestmachineforvue"}] */],
     showModal : false,
+    gachaDetailId : 0,
     currentGachaMachine: {id: 0, name: "", item1Rarity: 0, item2Rarity: 0, item3Rarity: 0, item4Rarity: 0, item5Rarity: 0, item6Rarity: 0, item7Rarity: 0, item8Rarity: 0, item9Rarity: 0, item10Rarity: 0, gachaAmount: 0}
     };
   },
-  async created() {this.gachas = await (await fetch("http://localhost:8090/gachas")).json()}
-}
+  async created() {this.gachas = await (await fetch("http://localhost:8090/gachas")).json();},
+  watch: {
+    async gachaDetailId(newId) {
+      this.currentGachaMachine = await (await fetch(`http://localhost:8090/gachas/${newId}`)).json();
+      this.showModal = true;
+    },
+  },
+};
 </script>
 
 <style scoped>
