@@ -1,18 +1,11 @@
 <template>
   <div>
-    <table border="1">
-      <caption>
-        Kõik Gachapon masinad
-      </caption>
-      <tr>
-        <th>Masina nimi</th>
-        <th></th>
-      </tr>
-      <tr v-for="gacha in gachas" :key="gacha.id">
-        <td>{{ gacha.name }}</td>
-        <td><button @click=" gachaDetailId = gacha.id">Kuva Detailid</button></td>
-      </tr>
-    </table>
+  <table-template 
+    caption="Kõik Gacha Masinad" 
+    :items="gachas" 
+    :showControls="true" 
+    @show="gachaDetailId = $event.id">
+  </table-template>
   </div>
   <Teleport to="body">
     <!-- use the modal component, pass in the prop -->
@@ -39,11 +32,13 @@
 </template>
 
 <script>
-import Modal from './components/Modal.vue'
+import Modal from './components/Modal.vue';
+import TableTemplate from './components/Table.vue';
 
 export default {
   components: {
-    Modal
+    Modal,
+    TableTemplate,
   }, 
   data() {
     return {
