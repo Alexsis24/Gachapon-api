@@ -1,21 +1,33 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div>
+    <table border="1">
+      <caption>
+        Kõik Gachapon-masinad
+      </caption>
+      <tr>
+        <th>Masina nimi</th>
+      </tr>
+      <tr v-for="gacha in gachas" :key="gacha.id">
+        <td>{{ gacha.name }}</td>
+      </tr>
+    </table>
+  </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      msg: "Hello wörld",
+      gachas: [
+        /* 
+        {id:1,name:"testgachamachineforvue"},
+    {id:2,name:"anothertestmachineforvue"}] */]
+    }
+  },
+  async created() {this.gachas = await (await fetch("http://localhost:8090/gachas")).json}
+}
+</script>
 
 <style scoped>
 header {
