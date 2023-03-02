@@ -1066,6 +1066,9 @@
             "summary": "Path used to manage the list of raritylists.",
             "description": "The REST endpoint/path used to list and create zero or more `RarityList` entities.  This path contains a `GET` and `POST` operation to perform the list and create tasks, respectively.",
             "get": {
+                "tags": [
+                    "RarityList"
+                ],
                 "responses": {
                     "200": {
                         "headers": {
@@ -1116,6 +1119,9 @@
                     },
                     "required": true
                 },
+                "tags": [
+                    "RarityList"
+                ],
                 "responses": {
                     "200": {
                         "content": {
@@ -1153,6 +1159,9 @@
             "summary": "Path used to manage a single RarityList.",
             "description": "The REST endpoint/path used to get, update, and delete single instances of an `RarityList`.  This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks, respectively.",
             "get": {
+                "tags": [
+                    "RarityList"
+                ],
                 "responses": {
                     "200": {
                         "content": {
@@ -1198,6 +1207,9 @@
                     },
                     "required": true
                 },
+                "tags": [
+                    "RarityList"
+                ],
                 "responses": {
                     "200": {
                         "headers": {
@@ -1240,6 +1252,9 @@
                 "description": "Updates an existing `RarityList`."
             },
             "delete": {
+                "tags": [
+                    "RarityList"
+                ],
                 "responses": {
                     "204": {
                         "headers": {
