@@ -6,7 +6,7 @@ module.exports = (sequelize, Sequelize, Item, Gacha) =>{
             autoIncrement: true,
             allowNull: false
         },
-        Rarity : {
+        RarityValue : {
             type: Sequelize.INTEGER,
             allowNull: false
         },
@@ -20,33 +20,10 @@ module.exports = (sequelize, Sequelize, Item, Gacha) =>{
                 model: Gacha,
                 key: "id",
             },
-        },
-        Item1ID : {
-            type: Sequelize.INTEGER,
-            references:{
-                model: Item,
-                key: "id",
-            },
-        },
-        Item2ID : {
-            type: Sequelize.INTEGER,
-            references:{
-                model: Item,
-                key: "id",
-            },
-        },
-        Item3ID : {
-            type: Sequelize.INTEGER,
-            references:{
-                model: Item,
-                key: "id",
-            },
-        },
+        }
     })
-    Item.belongsToMany(Item, { through: RarityList })
+    
     Gacha.belongsToMany(Gacha, { through: RarityList })
-    Item.hasMany(RarityList)
-    RarityList.belongsTo(Item)
     Gacha.hasMany(RarityList)
     RarityList.belongsTo(Gacha)
     return RarityList

@@ -5,7 +5,7 @@ const Gacha = db.gachas
 const Item = db.items
 
 exports.getAll = async (req, res)=>{
-    const raritylists = await RarityLists.findAll({attributes:["id","Rarity","RarityName","GachaId","Item1ID","Item2ID","Item3ID"]})
+    const raritylists = await RarityLists.findAll({attributes:["id","RarityValue","RarityName","GachaId","Item1ID","Item2ID","Item3ID"]})
     res.send(raritylists)
 }
 exports.getById = async (req, res)=>{

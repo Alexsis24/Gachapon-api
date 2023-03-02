@@ -1,4 +1,4 @@
-module.exports = (sequelize,Sequelize) => {
+module.exports = (sequelize,Sequelize,RarityList) => {
     const Item = sequelize.define('Item',{
         id: {
             type: Sequelize.INTEGER,
@@ -20,7 +20,17 @@ module.exports = (sequelize,Sequelize) => {
         ItemSupply: {
             type: Sequelize.INTEGER,
             allowNull: false
+        },
+        ItemRarity:{
+            type: Sequelize.INTEGER,
+            references:{
+                model: RarityList,
+                key: "id",
+            }
         }
     })
+    RarityList.belongsToMany(RarityList, { through: Item })
+    RarityList.hasMany(Item)
+    Item.belongsTo(RarityList)
     return Item
 }
