@@ -18,12 +18,11 @@
 export default {
   data() {
     return {
-      msg: "Hello wörld",
       gachas: [
         /* 
         {id:1,name:"testgachamachineforvue"},
     {id:2,name:"anothertestmachineforvue"}] */]
-    }
+    };
   },
   async created() {this.gachas = await (await fetch("http://localhost:8090/gachas")).json}
 }
