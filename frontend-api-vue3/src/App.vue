@@ -9,7 +9,7 @@
   </div>
   <Teleport to="body">
     <!-- use the modal component, pass in the prop -->
-    <modal :show="showModal" @close="showModal = false">
+    <modal :show="gachaDetailId != 0" @close="gachaDetailId = 0">
       <template #header>
         <h3>Gachapon machine details</h3>
       </template>
@@ -50,7 +50,13 @@ export default {
     currentGachaMachine: {id: 0, name: "", item1Rarity: 0, item2Rarity: 0, item3Rarity: 0, item4Rarity: 0, item5Rarity: 0, item6Rarity: 0, item7Rarity: 0, item8Rarity: 0, item9Rarity: 0, item10Rarity: 0, gachaAmount: 0}
     };
   },
-  async created() {this.gachas = await (await fetch("http://localhost:8090/gachas")).json()}
+  async created() {this.gachas = await (await fetch("http://localhost:8090/gachas")).json()},
+  watch: { async gameDetailId(newId) {
+    if (newIs == 0) return;
+    this.currentGame = await (
+      await fetch(`http://localhost:8090/gachas/${newId}`)).json();
+    }
+  }
 }
 </script>
 
