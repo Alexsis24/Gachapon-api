@@ -53,7 +53,7 @@ export default {
   async created() {this.gachas = await (await fetch("http://localhost:8090/gachas")).json()},
   watch: { async gameDetailId(newId) {
     if (newIs == 0) return;
-    this.currentGame = await (
+    this.currentGachaMachine = await (
       await fetch(`http://localhost:8090/gachas/${newId}`)).json();
     }
   }

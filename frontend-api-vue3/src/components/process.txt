@@ -1,0 +1,37 @@
+User pushes button
+
+a check is first performed to see if the machine is empty or not:
+if(gachaAmount < 1)
+{
+    return error (machine is empty, please contact sysadmin)
+}
+
+
+if it is not, the buttonpush is allowed and 
+a random number is generated (1-10)
+
+the number corresponds to one of the raritylist item slots in the machine.
+
+the UI looks at the written raritytype in the slot. (1-4)
+
+UI then looks at how many rows are in this raritytable using count( all | distinct expression)
+the full database operation example is as follows: select count(*) row_count from count_demos;
+
+This is done so the ui has a new range to select from.
+it then selects a random number between (1-row_count) and then selects that row:
+-- SELECT * FROM <rarity type in the rng slot> 
+    WHERE RARITYLISTID = <random number selected between 1-row_count> 
+
+The ui then checks if the machine ID matches the one it was pulled from, if not, a loop follows,
+which increments the number by 1 until the machine id matches:
+
+
+while(machineid != usersbuttonpushmachineid)
+{
+    random number selected between 1-row_count += 1
+    -- SELECT * FROM <rarity type in the rng slot> 
+       WHERE RARITYLISTID = <random number selected between 1-row_count> 
+}
+
+
+The same check happes for the amount of pulls in the item supply.
