@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div v-if="error">{{ error }}</div>
+        <div v-if="error"> <span v-for="(message, index) in error" :key="index">{{ message }} <br/> </span> </div>
         <form @submit.prevent="formSubmitHandler">
             <div class="row">
                 <div class="col-25">
