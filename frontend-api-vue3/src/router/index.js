@@ -9,6 +9,11 @@ const router = createRouter({
       component: () => import("../views/AllGachaponMachinesView.vue"),
     },
     {
+      path: "/addGacha",
+      name: "addGacha",
+      component: () => import("../views/CreateGachaponMachineView.vue"),
+    },
+    {
       path: "/about",
       name: "about",
       // route level code-splitting
