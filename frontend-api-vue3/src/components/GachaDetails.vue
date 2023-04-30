@@ -7,17 +7,8 @@
       </template>
       <template #body>
         <b>Nimi: </b>{{ currentGachaMachine.name }}<br>
-        <b>Harulduse number: </b>{{ currentGachaMachine.item1Rarity }}<br>
-        <b>Harulduse number: </b>{{ currentGachaMachine.item2Rarity }}<br>
-        <b>Harulduse number: </b>{{ currentGachaMachine.item3Rarity }}<br>
-        <b>Harulduse number: </b>{{ currentGachaMachine.item4Rarity }}<br>
-        <b>Harulduse number: </b>{{ currentGachaMachine.item5Rarity }}<br>
-        <b>Harulduse number: </b>{{ currentGachaMachine.item6Rarity }}<br>
-        <b>Harulduse number: </b>{{ currentGachaMachine.item7Rarity }}<br>
-        <b>Harulduse number: </b>{{ currentGachaMachine.item8Rarity }}<br>
-        <b>Harulduse number: </b>{{ currentGachaMachine.item9Rarity }}<br>
-        <b>Harulduse number: </b>{{ currentGachaMachine.item10Rarity }}<br>
         <b>Kogus: </b>{{ currentGachaMachine.gachaAmount }}<br>
+        <b>Kirjeldus: </b>{{ currentGachaMachine.description }}<br>
       </template>
     </modal>
   </Teleport>
@@ -40,17 +31,8 @@ import Modal from './Modal.vue';
         currentGachaMachine: {
           id: 0,
           name: "",
-          item1Rarity: 0,
-          item2Rarity: 0,
-          item3Rarity: 0,
-          item4Rarity: 0,
-          item5Rarity: 0,
-          item6Rarity: 0,
-          item7Rarity: 0,
-          item8Rarity: 0,
-          item9Rarity: 0,
-          item10Rarity: 0,
-          gachaAmount: 0
+          gachaAmount: 0,
+          description: "",
         },
       };
     },
