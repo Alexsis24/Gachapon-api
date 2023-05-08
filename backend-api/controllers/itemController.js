@@ -3,7 +3,11 @@ const {db} = require("../db")
 const Items = db.items
 
 exports.getAll = async (req, res)=>{
-    const items = await Items.findAll({attributes:["id","itemName","itemDescription","itemImageLink","itemSupply"]})
+    const items = await Items.findAll({attributes:["id","itemName","itemDescription","itemImageLink","itemSupply","itemRarity","itemMachine"]})
+    res.send(items)
+}
+exports.getAllWhereGachaId = async (req, res)=>{
+    const items = await Items.findAll({ where: {itemMachine: req.params.gachaDetailId}, attributes:["id","itemName","itemDescription","itemImageLink","itemSupply","itemRarity","itemMachine"]})
     res.send(items)
 }
 exports.getById = async (req, res)=>{
