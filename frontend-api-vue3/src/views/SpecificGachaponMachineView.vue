@@ -1,8 +1,8 @@
 <template>
     <div>
     <table-template 
-      caption="Gachapon masinas olevad asjad" 
-      :items="items" 
+      caption=""
+      :items="gachas" 
       :showControls="true" 
       @show="gachaDetailId = $event.id">
     </table-template>
@@ -14,14 +14,22 @@
   </template>
   
   <script>
-  import TableTemplate from '../components/Table.vue';
-  import GachaDetails from '../components/GachaDetails.vue';
+  import TableMachineTemplate from '../components/TableMachine.vue';
+  import GachaItemDetails from '../components/GachaItemDetails.vue';
+  import { RouterLink } from 'vue-router';
   
   export default {
     components: {
-      GachaDetails,
-      TableTemplate,
-    }, 
+      GachaDetails: GachaItemDetails,
+      TableTemplate: TableMachineTemplate,
+      RouterLink,
+    },
+      props: {
+        gachaDetailId: {
+          type : Number,
+          required : true,
+        }
+      }, 
     data() {
       return {
         gachas: [],
@@ -29,7 +37,7 @@
       };
     },
     async created() {
-      this.gachas = await (await fetch("http://localhost:8090/gachas")).json()
+      this.gachas = await (await fetch("http://localhost:8090/items")).json()
     },  
   }
   </script>

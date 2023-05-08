@@ -16,9 +16,7 @@
                 <button @click="$emit('show', item)">Näita</button>
             </td>
             <td v-if="showControls">
-                <router-link :to="{name: 'viewGacha', params: {gachaId: item.id}}" v-slot="{ navigate }">
-                    <button @click="navigate" role="link" >Vaata Lähemalt</button>
-                </router-link>
+                <button @click="$emit('show', item)">Vaata Lähemalt</button>
             </td>
             <slot name="additionalColumns"></slot>
         </tr>

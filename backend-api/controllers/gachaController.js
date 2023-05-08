@@ -3,7 +3,7 @@ const {db} = require("../db")
 const Gachas = db.gachas
 
 exports.getAll = async (req, res)=>{
-    const gachas = await Gachas.findAll({attributes:["id","name"]})
+    const gachas = await Gachas.findAll({attributes:["id","name","gachaAmount","description"]})
     res.send(gachas)
 }
 exports.getById = async (req, res)=>{

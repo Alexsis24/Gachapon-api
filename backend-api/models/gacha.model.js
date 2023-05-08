@@ -18,4 +18,5 @@ module.exports = (sequelize,Sequelize) => {
             allowNull: true
         }
     })
+    return Gacha;
 }
