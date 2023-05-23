@@ -17,8 +17,8 @@ exports.getAll = async (req,res) => {
     let result = []
     result = rewards.map( (mr) => { 
         return {
-            "itemName": mr.item.ItemName,
-            "gachaName": mr.gacha.name
+            "itemName": mr.Item.ItemName,
+            "gachaName": mr.Gacha.name
         }
     }) 
     res.send(result)

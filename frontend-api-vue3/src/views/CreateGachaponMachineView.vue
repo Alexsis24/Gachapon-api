@@ -87,33 +87,14 @@ export default {
         return {
             error: '',
             name: 'frontend add machine test',
-            item1Rarity: '1',
-            item2Rarity: '2',
-            item3Rarity: '3',
-            item4Rarity: '4',
-            item5Rarity: '5',
-            item6Rarity: '6',
-            item7Rarity: '7',
-            item8Rarity: '8',
-            item9Rarity: '9',
-            item10Rarity: '10',
-            gachaAmount: '100'
+            gachaAmount: '100',
+            description: 'example machine test description'
         }
     },
     methods: {
         formSubmitHandler() {
             const newGachaMachine = {
                 name: this.name,
-                item1Rarity: this.item1Rarity,
-                item2Rarity: this.item2Rarity,
-                item3Rarity: this.item3Rarity,
-                item4Rarity: this.item4Rarity,
-                item5Rarity: this.item5Rarity,
-                item6Rarity: this.item6Rarity,
-                item7Rarity: this.item7Rarity,
-                item8Rarity: this.item8Rarity,
-                item9Rarity: this.item9Rarity,
-                item10Rarity: this.item10Rarity,
                 gachaAmount: this.gachaAmount
             }
             fetch(API_URL, {method: 'POST', headers: {"Content-Type": "application/json"}, body: JSON.stringify(newGachaMachine)

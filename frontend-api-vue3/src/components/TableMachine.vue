@@ -14,11 +14,11 @@
                 <span v-else>{{ item[keyName] }}</span>
             </td>
             <td v-if="showControls">
-                <button @click="$emit('show', item)">Näita</button>
+                <button @click="$emit('show', item)">Show</button>
             </td>
             <td v-if="showControls">
                 <router-link :to="{name: 'viewGacha', params: {gachaId: item.id}}" v-slot="{ navigate }">
-                    <button @click="navigate" role="link" >Vaata Lähemalt</button>
+                    <button @click="navigate" role="link" >See Rewards</button>
                 </router-link>
             </td>
             <slot name="additionalColumns"></slot>

@@ -33,7 +33,12 @@ const router = createRouter({
       name: "addItems",
       component: () => import("../views/SpecificItemView.vue"),
     },
-    
+    {
+      path: "/viewGacha/:gachaId",
+      name: "viewGacha",
+      component: () => import("../views/SpecificGachaponMachineView.vue"),
+      props: route => { return { gachaDetailId: Number(route.params.gachaId)}}
+    },
     {
       path: "/about",
       name: "about",

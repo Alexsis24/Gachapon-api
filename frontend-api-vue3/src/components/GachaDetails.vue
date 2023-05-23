@@ -12,7 +12,7 @@
         <b>Kirjeldus: </b>{{ currentGachaMachine.description }}<br>
 
         <ul>
-          <li v-for="reward in currentGachaMachine.reward" :key="reward.id">
+          <li v-for="reward in currentGachaMachine.rewards" :key="reward.id">
             {{ reward.item.ItemName  }}
           </li>
         </ul>
@@ -44,12 +44,10 @@ import Modal from './Modal.vue';
           rewards: [
             {
               id: 0,
-              item: [
-                {
+              item: {
                   id: 0,
                   ItemName: "",
-                },
-              ],
+                },              
             },
           ],
         },

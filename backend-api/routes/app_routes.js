@@ -39,11 +39,11 @@ module.exports = (app) => {
     ////////////////////////////////
     app.route("/rewards")
         .get(rewardController.getAll)
-        .post(rewardController.createNew) //Create
+        //.post(rewardController.createNew) //Create
     app.route("/rewards/:rewardId")
         .get(rewardController.getById) //Read
-        .put(rewardController.updateById) //Update
-        .delete(rewardController.deleteById) //Delete
+        //.put(rewardController.updateById) //Update
+        //.delete(rewardController.deleteById) //Delete
     ////////////////////////////////
     
 }

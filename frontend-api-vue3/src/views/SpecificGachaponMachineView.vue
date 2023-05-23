@@ -2,42 +2,42 @@
     <div>
     <table-template 
       caption=""
-      :items="gachas" 
+      :items="rewards" 
       :showControls="true" 
-      @show="gachaDetailId = $event.id">
+      @show="rewardDetailId = $event.id">
     </table-template>
     </div>
-  <gacha-details 
-    :gachaDetailId = "gachaDetailId"
-    @close="gachaDetailId = 0">
-  </gacha-details> 
+  <reward-details 
+    :rewardDetailId = "rewardDetailId"
+    @close="rewardDetailId = 0">
+  </reward-details> 
   </template>
   
   <script>
   import TableMachineTemplate from '../components/TableMachine.vue';
-  import GachaItemDetails from '../components/GachaItemDetails.vue';
+  import RewardItemDetails from "../components/RewardDetails.vue" //'../components/SpecificItemView.vue';
   import { RouterLink } from 'vue-router';
   
   export default {
     components: {
-      GachaDetails: GachaItemDetails,
+      RewardDetails: RewardItemDetails,
       TableTemplate: TableMachineTemplate,
       RouterLink,
     },
       props: {
-        gachaDetailId: {
+        rewardDetailId: {
           type : Number,
           required : true,
         }
       }, 
     data() {
       return {
-        gachas: [],
-        gachaDetailId: 0,    
+        rewards: [],
+        rewardDetailId: 0,    
       };
     },
     async created() {
-      this.gachas = await (await fetch("http://localhost:8090/gachas")).json()
+      this.gachas = await (await fetch("http://localhost:8090/rewards")).json()
     },  
   }
   </script>
