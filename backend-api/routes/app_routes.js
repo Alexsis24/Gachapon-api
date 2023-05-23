@@ -36,5 +36,13 @@ module.exports = (app) => {
         .put(ownershipController.updateById) //Update
         .delete(ownershipController.deleteById) //Delete
     ////////////////////////////////
+    app.route("/rewards")
+        .get(rewardController.getAll)
+        .post(rewardController.createNew) //Create
+    app.route("/rewards/:rewardId")
+        .get(rewardController.getById) //Read
+        .put(rewardController.updateById) //Update
+        .delete(rewardController.deleteById) //Delete
+    ////////////////////////////////
     
 }

@@ -1307,6 +1307,250 @@
                     "required": true
                 }
             ]
+        },
+        "/rewards": {
+            "summary": "Path used to manage the list of rewards.",
+            "description": "The REST endpoint/path used to list and create zero or more `Reward` entities.  This path contains a `GET` and `POST` operation to perform the list and create tasks, respectively.",
+            "get": {
+                "tags": [
+                    "rewards"
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns an array of `Reward` entities."
+                    },
+                    "404": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Table not found"
+                    }
+                },
+                "operationId": "getRewards",
+                "summary": "List All Rewards",
+                "description": "Gets a list of all `Reward` entities."
+            },
+            "post": {
+                "requestBody": {
+                    "description": "A new `Reward` to be created.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Reward"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "rewards"
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns a list of rewards"
+                    },
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Adds new reward to database"
+                    }
+                },
+                "operationId": "createReward",
+                "summary": "Create a Reward",
+                "description": "Creates a new instance of a `Reward`."
+            }
+        },
+        "/rewards/{rewardId}": {
+            "summary": "Path used to manage a single Reward.",
+            "description": "The REST endpoint/path used to get, update, and delete single instances of an `Reward`.  This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks, respectively.",
+            "get": {
+                "tags": [
+                    "rewards"
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns a single `Reward`."
+                    },
+                    "404": {
+                        "headers": {
+                            "location": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "description": "Reward not found"
+                    }
+                },
+                "operationId": "getReward",
+                "summary": "Get a Reward",
+                "description": "Gets the details of a single instance of a `Reward`."
+            },
+            "put": {
+                "requestBody": {
+                    "description": "Updated `Reward` information.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Reward"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "rewards"
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "Reward was updated"
+                    },
+                    "404": {
+                        "headers": {
+                            "location": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        },
+                        "description": "Reward not found"
+                    },
+                    "500": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "Internal Server Error"
+                    }
+                },
+                "operationId": "updateReward",
+                "summary": "Update a Reward",
+                "description": "Updates an existing `Reward`."
+            },
+            "delete": {
+                "tags": [
+                    "rewards"
+                ],
+                "responses": {
+                    "204": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "Successful response."
+                    },
+                    "404": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "404 not found"
+                    },
+                    "500": {
+                        "headers": {
+                            "location": {}
+                        },
+                        "content": {
+                            "application/json": {}
+                        },
+                        "description": "Interna Server Error"
+                    }
+                },
+                "operationId": "deleteReward",
+                "summary": "Delete a Reward",
+                "description": "Deletes an existing `Reward`."
+            },
+            "parameters": [
+                {
+                    "name": "rewardId",
+                    "description": "A unique identifier for a `Reward`.",
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
         }
     },
     "components": {
@@ -1315,16 +1559,6 @@
                 "description": "",
                 "required": [
                     "name",
-                    "item1Rarity",
-                    "item2Rarity",
-                    "item3Rarity",
-                    "item4Rarity",
-                    "item5Rarity",
-                    "item6Rarity",
-                    "item7Rarity",
-                    "item8Rarity",
-                    "item9Rarity",
-                    "item10Rarity",
                     "gachaAmount"
                 ],
                 "type": "object",
@@ -1333,50 +1567,13 @@
                         "description": "Name of the Gachapon machine.",
                         "type": "string"
                     },
-                    "item1Rarity": {
-                        "description": "Rarity randomizer slot 1 with its assosiated rarity collection of items.",
-                        "type": "integer",
-                        "example": "[\n    \"rarity\"=== 1\n]"
-                    },
-                    "item2Rarity": {
-                        "description": "Rarity randomizer slot 2 with its assosiated rarity collection of items.",
-                        "type": "integer"
-                    },
-                    "item3Rarity": {
-                        "description": "Rarity randomizer slot 3 with its assosiated rarity collection of items.",
-                        "type": "integer"
-                    },
-                    "item4Rarity": {
-                        "description": "Rarity randomizer slot 4 with its assosiated rarity collection of items.",
-                        "type": "integer"
-                    },
-                    "item5Rarity": {
-                        "description": "Rarity randomizer slot 5 with its assosiated rarity collection of items.",
-                        "type": "integer"
-                    },
-                    "item6Rarity": {
-                        "description": "Rarity randomizer slot 6 with its assosiated rarity collection of items.",
-                        "type": "integer"
-                    },
-                    "item7Rarity": {
-                        "description": "Rarity randomizer slot 7 with its assosiated rarity collection of items.",
-                        "type": "integer"
-                    },
-                    "item8Rarity": {
-                        "description": "Rarity randomizer slot 8 with its assosiated rarity collection of items.",
-                        "type": "integer"
-                    },
-                    "item9Rarity": {
-                        "description": "Rarity randomizer slot 9 with its assosiated rarity collection of items.",
-                        "type": "integer"
-                    },
-                    "item10Rarity": {
-                        "description": "Rarity randomizer slot 10 with its assosiated rarity collection of items.",
-                        "type": "integer"
-                    },
                     "gachaAmount": {
                         "description": "Shows how many items are left in the Gachapon machine.",
                         "type": "integer"
+                    },
+                    "description": {
+                        "description": "",
+                        "type": "string"
                     }
                 }
             },
@@ -1418,7 +1615,8 @@
                     "ItemDescription",
                     "ItemImageLink",
                     "ItemSupply",
-                    "ItemRarity"
+                    "ItemRarity",
+                    "ItemMachine"
                 ],
                 "type": "object",
                 "properties": {
@@ -1440,6 +1638,10 @@
                     },
                     "ItemRarity": {
                         "description": "FK Id for which rarity the item belongs to ",
+                        "type": "integer"
+                    },
+                    "ItemMachine": {
+                        "description": "",
                         "type": "integer"
                     }
                 }
@@ -1484,6 +1686,29 @@
                     },
                     "GachaID": {
                         "description": "FK Id of the machine that raritylist belongs to",
+                        "type": "integer"
+                    }
+                }
+            },
+            "Reward": {
+                "description": "Connection between machine and selected item",
+                "required": [
+                    "GachaId",
+                    "ItemId",
+                    "Amount"
+                ],
+                "type": "object",
+                "properties": {
+                    "GachaId": {
+                        "description": "Id of rewards owner machine",
+                        "type": "integer"
+                    },
+                    "ItemId": {
+                        "description": "Id of the rewards item",
+                        "type": "integer"
+                    },
+                    "Amount": {
+                        "description": "",
                         "type": "integer"
                     }
                 }
