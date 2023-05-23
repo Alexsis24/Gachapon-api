@@ -1,8 +1,7 @@
 <template>
     <div>
-      <router-link to="/addGacha">Add new Gachapon Machine</router-link>
     <table-template 
-      caption="Kõik Gacha Masinad" 
+      caption=""
       :items="gachas" 
       :showControls="true" 
       @show="gachaDetailId = $event.id">
@@ -15,19 +14,22 @@
   </template>
   
   <script>
-  import TableTemplate from '../components/Table.vue';
-  import GachaDetails from '../components/GachaDetails.vue';
+  import TableMachineTemplate from '../components/TableMachine.vue';
+  import GachaItemDetails from '../components/GachaItemDetails.vue';
   import { RouterLink } from 'vue-router';
-  //import modal. why isnt it here?
-  import Modal from '../components/Modal.vue';
   
   export default {
     components: {
-      GachaDetails,
-      TableTemplate,
+      GachaDetails: GachaItemDetails,
+      TableTemplate: TableMachineTemplate,
       RouterLink,
-      Modal,
-    }, 
+    },
+      props: {
+        gachaDetailId: {
+          type : Number,
+          required : true,
+        }
+      }, 
     data() {
       return {
         gachas: [],
@@ -35,7 +37,7 @@
       };
     },
     async created() {
-      this.gachas = await (await fetch("http://localhost:8090/gachas")).json()
+      this.gachas = await (await fetch("http://localhost:8090/items")).json()
     },  
   }
   </script>

@@ -4,10 +4,26 @@ const Rewards = db.rewards
 const Gacha = db.gachas
 const Item = db.items
 
-exports.getAll = async (req, res)=>{
+/*exports.getAll = async (req, res)=>{
     const rewards = await Rewards.findAll({attributes:["id","GachaId","ItemId","Amount"]})
     res.send(rewards)
+}*/
+exports.getAll = async (req,res) => {
+    const rewards = await Rewards.findAll({
+        include: { all: true },
+        logging: console.log
+    })
+    console.log(rewards);
+    let result = []
+    result = rewards.map( (mr) => { 
+        return {
+            "itemName": mr.item.ItemName,
+            "gachaName": mr.gacha.name
+        }
+    }) 
+    res.send(result)
 }
+
 exports.getById = async (req, res)=>{
     const Reward = await Rewards.findByPk(req.params.rewardId)
     if (Reward === null) {
@@ -17,7 +33,28 @@ exports.getById = async (req, res)=>{
     res.send(Reward)
     
 }
-exports.createNew = async (req,res) =>{
+/*exports.createNew = async (req,res) =>{
+    console.log("New Reward: ",req.body)
+    let rewards
+    try {
+        rewards = await Rewards.create(req.body,exports.getAll = async (req,res) => {
+    const gamePlays = await GamePlays.findAll({
+        include: { all: true },
+        logging: console.log
+    })
+    console.log(gamePlays);
+    let result = []
+    result = gamePlays.map( (gp) => { 
+        return {
+            "gameName":gp.game.name,
+            "playerName": ${gp.player.name}
+        }
+    }) 
+    res.send(result)
+}*/
+            
+
+/*exports.createNew = async (req,res) =>{
     console.log("New Reward: ",req.body)
     let rewards
     try {
@@ -40,8 +77,9 @@ exports.createNew = async (req,res) =>{
             return
     }
     res.status(201).location(`${getBaseUrl(req)}/rewards/${Rewards.id}`).json(rewards)
-}
+}*/
 
+/*
 exports.deleteById = async (req, res) => {
     let result 
     try {
@@ -56,9 +94,9 @@ exports.deleteById = async (req, res) => {
         return
     }
     res.status(204).send()
-}
+}*/
 
-exports.updateById = async (req, res) => {
+/*exports.updateById = async (req, res) => {
     let result 
     delete req.body.id
     console.log(req.body)
@@ -77,7 +115,7 @@ exports.updateById = async (req, res) => {
     const Reward = await Rewards.findByPk(req.params.rewardId)
     console.log(Reward)
     res.status(200).location(`${getBaseUrl(req)}/rewards/${Rewards.id}`).json(Reward)
-}
+}*/
 
 getBaseUrl = (request) => {
     return ((request.connection &&request.connection.encrypted ? "https":"http") + `://${request.headers.host}`)
