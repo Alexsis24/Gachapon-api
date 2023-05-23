@@ -5,13 +5,26 @@
       caption="Kõik Gacha Masinad" 
       :items="gachas" 
       :showControls="true" 
-      @show="gachaDetailId = $event.id">
+      @show="gachaDetailId = $event.id"
+      @delete="gachaToDelete = $event">
     </table-template>
     </div>
   <gacha-details 
     :gachaDetailId = "gachaDetailId"
     @close="gachaDetailId = 0">
   </gacha-details> 
+  <modal :show="JSON.stringify(gachaToDelete) !== '{}'">
+    <template #header>
+      <h3>Gachapon deletion</h3>
+    </template>
+    <template #body>
+      <p>*John Cena* "ARE YOU SURE ABOUT THAT?!??!"</p>
+    </template>
+    <template #footer>
+      <button class="modal-default-button" @click="deleteGacha()">Yes</button>
+      <button class="modal-default-button" @click="gachaToDelete={}">No</button>
+    </template>
+  </modal>
   </template>
   
   <script>
@@ -32,12 +45,27 @@
       return {
         gachas: [],
         gachaDetailId: 0,    
+        gachaToDelete: {}
       };
     },
     async created() {
       this.gachas = await (await fetch("http://localhost:8090/gachas")).json()
     },  
-  }
+    methods: {
+      async deleteGacha() {
+        fetch("http://localhost:8090/gachas" + this.gachaToDelete.id, {method: "delete", })
+        .then(async(response) =>{
+          if (response.status == 204) {
+            this.gachas.splice(this.gachas.indexOf(this.gachaToDelete), 1);
+            this.gachaToDelete = {};
+          } else {
+            const data = await response.json();
+            console.log("delete: ",data);}
+        });
+      }
+    }
+  };
+  
   </script>
   
   <style scoped>

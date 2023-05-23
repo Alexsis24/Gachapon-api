@@ -5,14 +5,22 @@
       <template #header>
         <h3>Gachapon machine details</h3>
       </template>
+
       <template #body>
         <b>Nimi: </b>{{ currentGachaMachine.name }}<br>
         <b>Kogus: </b>{{ currentGachaMachine.gachaAmount }}<br>
         <b>Kirjeldus: </b>{{ currentGachaMachine.description }}<br>
+
+        <ul>
+          <li v-for="reward in currentGachaMachine.reward" :key="reward.id">
+            {{ reward.item.ItemName  }}
+          </li>
+        </ul>
       </template>
     </modal>
   </Teleport>
 </template>
+
 <script>
 import Modal from './Modal.vue';
   export default {
@@ -33,6 +41,17 @@ import Modal from './Modal.vue';
           name: "",
           gachaAmount: 0,
           description: "",
+          rewards: [
+            {
+              id: 0,
+              item: [
+                {
+                  id: 0,
+                  ItemName: "",
+                },
+              ],
+            },
+          ],
         },
       };
     },

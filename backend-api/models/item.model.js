@@ -24,10 +24,6 @@ module.exports = (sequelize,Sequelize) => {
         ItemRarity: {
             type: Sequelize.INTEGER,
             allowNull: false
-        },
-        ItemMachine: {
-            type: Sequelize.INTEGER,
-            allowNull: false
         }
     })
     return Item

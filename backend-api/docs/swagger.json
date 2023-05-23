@@ -1366,22 +1366,6 @@
                     "rewards"
                 ],
                 "responses": {
-                    "200": {
-                        "headers": {
-                            "location": {}
-                        },
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        },
-                        "description": "Returns a list of rewards"
-                    },
                     "201": {
                         "content": {
                             "application/json": {
@@ -1615,8 +1599,7 @@
                     "ItemDescription",
                     "ItemImageLink",
                     "ItemSupply",
-                    "ItemRarity",
-                    "ItemMachine"
+                    "ItemRarity"
                 ],
                 "type": "object",
                 "properties": {
@@ -1638,10 +1621,6 @@
                     },
                     "ItemRarity": {
                         "description": "FK Id for which rarity the item belongs to ",
-                        "type": "integer"
-                    },
-                    "ItemMachine": {
-                        "description": "",
                         "type": "integer"
                     }
                 }

@@ -1,16 +1,16 @@
 <template>
     <Teleport to="body">
       <!-- use the modal component, pass in the prop -->
-      <modal :show="gachaDetailId != 0" @close="$emit('close')">
+      <modal :show="itemDetailId != 0" @close="$emit('close')">
         <template #header>
           <h3>Selected item details</h3>
         </template>
         <template #body>
-          <b>Nimi: </b>{{ currentGachaMachineItem.ItemName }}<br>
-          <b>Kirjeldus: </b>{{ currentGachaMachineItem.ItemDescription }}<br>
-          <b>Pilt: </b>{{ currentGachaMachineItem.ItemImagelink }}<br>
-          <b>Supply: </b>{{ currentGachaMachineItem.ItemSupply }}<br>
-          <b>Haruldus: </b>{{ currentGachaMachineItem.ItemDescription }}<br>
+          <b>Nimi: </b>{{ currentItem.ItemName }}<br>
+          <b>Kirjeldus: </b>{{ currentItem.ItemDescription }}<br>
+          <b>Pilt: </b>{{ currentItem.ItemImagelink }}<br>
+          <b>Supply: </b>{{ currentItem.ItemSupply }}<br>
+          <b>Haruldus: </b>{{ currentItem.ItemDescription }}<br>
         </template>
       </modal>
     </Teleport>
@@ -22,7 +22,7 @@
         Modal,
       },
       props: {
-        gachaDetailId: {
+        itemDetailId: {
           type : Number,
           required : true,
         }
@@ -30,7 +30,7 @@
       emits:["close"],
       data() {
         return{
-          currentGachaMachineItem: {
+          currentItem: {
             id: 0,
             ItemName: "",
             ItemSupply: 0,
@@ -40,14 +40,14 @@
         };
       },
       beforeUpdate() {
-        //console.log(this.gachaDetailId);
-        if (this.gachaDetailId==0) return;
+        //console.log(this.itemDetailId);
+        if (this.itemDetailId==0) return;
         this.getDetails()
       },
       methods: {
         async getDetails() {
-          this.currentGachaMachine = await (
-            await fetch(`http://localhost:8090/gachas/${this.gachaDetailId}`)
+          this.currentItem = await (
+            await fetch(`http://localhost:8090/items/${this.itemDetailId}`)
           ).json();
         },
       },

@@ -12,17 +12,20 @@ const router = createRouter({
       path: "/addGacha",
       name: "addGacha",
       component: () => import("../views/CreateGachaponMachineView.vue"),
-    },
-    {
+    },/*{
       path: "/about",
       name: "about",
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import("../views/AboutView.vue"),
+    },*/{
+      path: "/createItem/",
+      name: "createItem",
+      component: () => import("../views/CreateItemView.vue"),
     },{
-      path: "/viewGacha/:gachaId",
-      name: "viewGacha",
+      path: "/viewSpecificGacha/:gachaId",
+      name: "viewSpecificGacha",
       component: () => import("../views/SpecificGachaponMachineView.vue"),
       props: route => { return { gachaDetailId: Number(route.params.gachaId) } },
     },
