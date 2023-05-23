@@ -2,6 +2,7 @@ const gachaController = require("../controllers/gachaController.js")
 const userController = require("../controllers/userController.js")
 const itemController = require("../controllers/itemController.js")
 const ownershipController = require("../controllers/ownershipController.js")
+const rewardController = require("../controllers/rewardController.js")
 
 module.exports = (app) => {
     app.route("/gachas")

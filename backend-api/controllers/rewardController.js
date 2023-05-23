@@ -18,7 +18,7 @@ exports.getById = async (req, res)=>{
     
 }
 exports.createNew = async (req,res) =>{
-    console.log("New Ownership: ",req.body)
+    console.log("New Reward: ",req.body)
     let rewards
     try {
         rewards = await Rewards.create(req.body,
@@ -39,7 +39,7 @@ exports.createNew = async (req,res) =>{
             }
             return
     }
-    res.status(201).location(`${getBaseUrl(req)}/reward/${Rewards.id}`).json(rewards)
+    res.status(201).location(`${getBaseUrl(req)}/rewards/${Rewards.id}`).json(rewards)
 }
 
 exports.deleteById = async (req, res) => {

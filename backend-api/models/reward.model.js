@@ -29,7 +29,7 @@ module.exports = (sequelize, Sequelize, Item, Gacha) =>{
     Item.belongsToMany(Gacha, { through: Reward })
     Gacha.belongsToMany(Item, { through: Reward })
     Item.hasMany(Reward)
-    Gacha.belongsTo(Item)
+    Reward.belongsTo(Item)
     Gacha.hasMany(Reward)
     Reward.belongsTo(Gacha)
     return Reward
