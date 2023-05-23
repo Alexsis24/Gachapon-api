@@ -1,45 +1,73 @@
 <template>
     <div>
+    <router-link to="/addItem">Add new Item</router-link>
     <table-template 
-      caption=""
-      :items="gachas" 
+      caption="All items"
+      :items="items" 
       :showControls="true" 
-      @show="gachaDetailId = $event.id">
+      @show="itemDetailId = $event.id"
+      @delete="itemToDelete = $event">
     </table-template>
     </div>
-  <gacha-details 
-    :gachaDetailId = "gachaDetailId"
-    @close="gachaDetailId = 0">
-  </gacha-details> 
+  <item-details 
+    :itemDetailId = "itemDetailId"
+    @close="itemDetailId = 0">
+  </item-details>
+  <modal :show="JSON.stringify(itemToDelete) !== '{}'">
+  <template #header>
+  <h3>Delete item</h3>
+  </template>
+  <template #body>
+      <p>Are you sure you want to delete?</p>
+    </template>
+    <template #footer>
+      <button class="modal-default-button" @click="deleteItem()">yes</button>
+      <button class="modal-default-button" @click="itemToDelete = {}">No</button>
+    </template>
+  </modal>
   </template>
   
   <script>
-  import TableMachineTemplate from '../components/TableMachine.vue';
-  import GachaItemDetails from '../components/GachaItemDetails.vue';
+  import TableTemplate from '../components/TableMachine.vue';
+  import ItemDetails from '../components/ItemDetails.vue';
+  import Modal from '../components/Modal.vue';
   import { RouterLink } from 'vue-router';
   
   export default {
     components: {
-      GachaDetails: GachaItemDetails,
-      TableTemplate: TableMachineTemplate,
+      ItemDetails,
+      TableTemplate,
       RouterLink,
-    },
-      props: {
-        gachaDetailId: {
-          type : Number,
-          required : true,
-        }
-      }, 
+      Modal,
+    }, 
     data() {
       return {
-        gachas: [],
-        gachaDetailId: 0,    
+        items: [],
+        itemDetailId: 0,    
+        itemToDelete: {},
       };
     },
     async created() {
-      this.gachas = await (await fetch("http://localhost:8090/items")).json()
-    },  
-  }
+      this.items = await (await fetch("http://localhost:8090/items")).json()
+    },
+    
+  methods: {
+    async deleteItem() {
+      fetch("http://localhost:8090/items/" + this.itemToDelete.id, {
+        method: "delete",
+      }).then(async (response) => {
+        if (response.status == 204) {
+          this.items.splice(this.games.indexOf(this.itemToDelete), 1);
+          this.itemToDelete = {};
+        } else {
+          const data = await response.json();
+          console.log("DELETE: ", data);
+        }
+      });
+    },
+  },
+  };
+
   </script>
   
   <style scoped>

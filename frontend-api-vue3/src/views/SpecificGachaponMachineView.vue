@@ -37,7 +37,7 @@
       };
     },
     async created() {
-      this.gachas = await (await fetch("http://localhost:8090/items")).json()
+      this.gachas = await (await fetch("http://localhost:8090/gachas")).json()
     },  
   }
   </script>
