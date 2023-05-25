@@ -1,11 +1,11 @@
 <template>           
     <div>
-      <router-link to="/createItem">Add new Gachapon Machine</router-link>
-      <table-item-template 
-        caption="Rewards"
-        :items="gacha.Items" 
-        :showControls="true" >
-      </table-item-template>
+      <router-link to="/createItem">Add new Item</router-link>
+    <table-item-template 
+      caption="Rewards"
+      :items="gacha.Items" 
+      :showControls="false" >
+    </table-item-template>
     </div>
   </template>
   

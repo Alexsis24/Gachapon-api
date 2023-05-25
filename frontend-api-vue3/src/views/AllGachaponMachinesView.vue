@@ -7,6 +7,7 @@
       :showControls="true" 
       @show="gachaDetailId = $event.id"
       @delete="gachaToDelete = $event"
+      @update="gachaToUpdate = $event.id"
       @rewards="navigateToRewards ($event.id)">
     </table-template>
     </div>
@@ -69,6 +70,17 @@
       navigateToRewards(gachaDetailId) {
         this.$router.push({name: "viewGacha", params: {gachaId: gachaDetailId}})
         
+      },
+      async updateGacha() {
+        fetch("http://localhost:8090/gachas/" + this.gachaToDelete.id, {method: "delete", })
+        .then(async(response) =>{
+          if (response.status == 204) {
+            this.gachas.splice(this.gachas.indexOf(this.gachaToDelete), 1);
+            this.gachaToDelete = {};
+          } else {
+            const data = await response.json();
+            console.log("delete: ",data);}
+        });
       },
 
     }

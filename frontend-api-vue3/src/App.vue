@@ -16,6 +16,7 @@ import AllGachaponMachinesView from "./views/AllGachaponMachinesView.vue";
     <div class="wrapper">
       <nav>
         <RouterLink to="/">All GachaMachines</RouterLink>
+        <RouterLink to="/allItems">All Items</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>

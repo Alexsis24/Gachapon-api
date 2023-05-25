@@ -27,6 +27,11 @@ const router = createRouter({
       path: "/GachaMachine",
       name: "GachaMachine",
       component: () => import("../views/SpecificGachaponMachineView.vue"),
+    },    
+    {
+      path: "/allItems",
+      name: "allItems",
+      component: () => import("../views/AllItemsView.vue"),
     },
     {
       path: "/addItems",
