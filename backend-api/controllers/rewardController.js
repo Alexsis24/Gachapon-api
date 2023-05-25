@@ -19,10 +19,12 @@ exports.getAll = async (req,res) => {
         return {
             "itemName": mr.Item.ItemName,
             "gachaName": mr.Gacha.name
+            
         }
     }) 
     res.send(result)
 }
+
 
 exports.getById = async (req, res)=>{
     const Reward = await Rewards.findByPk(req.params.rewardId)

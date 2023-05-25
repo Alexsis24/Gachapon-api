@@ -1,17 +1,4 @@
-<template>
-    <Teleport to="body">
-      <!-- use the modal component, pass in the prop -->
-      <modal :show="gachaDetailId != 0" @close="$emit('close')">
-        <template #header>
-          <h3>Selected item details</h3>
-        </template>
-        <template #body>
-          <b>Nimi: </b>{{ currentGachaMachineReward.ItemName }}<br>
-          <b>Pilt: </b>{{ currentGachaMachineReward.ItemImagelink }}<br>
-        </template>
-      </modal>
-    </Teleport>
-  </template>
+
   <script>
   import Modal from './Modal.vue';
     export default {
@@ -22,17 +9,20 @@
         gachaDetailId: {
           type : Number,
           required : true,
-        }
+        },
       },
       emits:["close"],
       data() {
         return{
-          currentGachaMachineReward: {
-            id: 0,
-            ItemName: "",
-            ItemImagelink: "",
-          },
-        };
+          currentGachaMachine: {
+            id: 0,            
+              Items: [{
+                id:0,
+                ItemName: "",
+                ItemImagelink: "",
+              }]
+            }
+          };
       },
       beforeUpdate() {
         //console.log(this.gachaDetailId);

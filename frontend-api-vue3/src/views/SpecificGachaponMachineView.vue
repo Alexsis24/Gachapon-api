@@ -1,43 +1,43 @@
-<template>
+<template>           
     <div>
-    <table-template 
-      caption=""
-      :items="rewards" 
-      :showControls="true" 
-      @show="rewardDetailId = $event.id">
-    </table-template>
+      <router-link to="/createItem">Add new Gachapon Machine</router-link>
+      <table-item-template 
+        caption="Rewards"
+        :items="gacha.Items" 
+        :showControls="true" >
+      </table-item-template>
     </div>
-  <reward-details 
-    :rewardDetailId = "rewardDetailId"
-    @close="rewardDetailId = 0">
-  </reward-details> 
   </template>
   
   <script>
-  import TableMachineTemplate from '../components/TableMachine.vue';
-  import RewardItemDetails from "../components/RewardDetails.vue" //'../components/SpecificItemView.vue';
+  import TableItemTemplate from '../components/TableItems.vue';
+/*   import Items from '../components/ItemDetails.vue' */
   import { RouterLink } from 'vue-router';
   
   export default {
     components: {
-      RewardDetails: RewardItemDetails,
-      TableTemplate: TableMachineTemplate,
+/*       ItemDetails: Items, */
+      TableItemTemplate: TableItemTemplate,
       RouterLink,
     },
-      props: {
-        rewardDetailId: {
-          type : Number,
-          required : true,
-        }
-      }, 
     data() {
       return {
-        rewards: [],
-        rewardDetailId: 0,    
+        gacha: {
+          Items:[{
+            id: 0,
+            ItemName: "",
+            ItemImageLink: "",
+          }]
+        },  
       };
     },
     async created() {
-      this.gachas = await (await fetch("http://localhost:8090/rewards")).json()
+      console.log("created", this.$route.params)
+      this.gacha = await (await fetch(`http://localhost:8090/gachas/${this.$route.params.gachaId}`)).json()
+      this.gacha.Items = this.gacha.Items.map(function(item) {delete item.Reward; return item})
+
+      console.log("gacha", this.gacha)
+
     },  
   }
   </script>

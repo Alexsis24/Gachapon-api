@@ -12,8 +12,8 @@
         <b>Kirjeldus: </b>{{ currentGachaMachine.description }}<br>
 
         <ul>
-          <li v-for="reward in currentGachaMachine.rewards" :key="reward.id">
-            {{ reward.item.ItemName  }}
+          <li v-for="item in currentGachaMachine.Items">
+            {{ item.ItemName  }}
           </li>
         </ul>
       </template>
@@ -41,15 +41,10 @@ import Modal from './Modal.vue';
           name: "",
           gachaAmount: 0,
           description: "",
-          rewards: [
-            {
-              id: 0,
-              item: {
+          Items: {
                   id: 0,
                   ItemName: "",
                 },              
-            },
-          ],
         },
       };
     },

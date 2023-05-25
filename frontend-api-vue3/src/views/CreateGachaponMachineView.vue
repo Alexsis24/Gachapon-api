@@ -2,80 +2,38 @@
     <div class="container">
         <div v-if="error"> <span v-for="(message, index) in error" :key="index">{{ message }} <br/> </span> </div>
         <form @submit.prevent="formSubmitHandler">
+
             <div class="row">
-                <div class="col-25">
-            <label for="name">Name</label></div>
+                <div class="col-50">
+                    <label for="name">Name</label>
+                </div>
                 <div class="col-75">
-            <input id="name" type="text" v-model="name" required></div>
+                <input id="name" type="text" v-model="name" required>
+                </div>
             </div>
+
             <div class="row">
-                <div class="col-25">
-            <label for="item1Rarity">Item 1 Rarity</label></div>
+                <div class="col-50">
+                <label for="gachaAmount">Amount of pulls in the machine</label>
+                </div>
                 <div class="col-75">
-            <input id="item1Rarity" type="text" v-model="item1Rarity" required> </div>
-            </div>    
-            <div class="row">
-                <div class="col-25">
-            <label for="item2Rarity">Item 2 Rarity</label></div>
-                <div class="col-75">
-            <input id="item2Rarity" type="text" v-model="item2Rarity" required> </div>
-            </div>   
-            <div class="row">
-                <div class="col-25">
-            <label for="item3Rarity">Item 3 Rarity</label></div>
-                <div class="col-75">
-            <input id="item3Rarity" type="text" v-model="item3Rarity" required> </div>
-            </div>   
-            <div class="row">
-                <div class="col-25">
-            <label for="item4Rarity">Item 4 Rarity</label></div>
-                <div class="col-75">
-            <input id="item4Rarity" type="text" v-model="item4Rarity" required> </div>
-            </div>   
-            <div class="row">
-                <div class="col-25">
-            <label for="item5Rarity">Item 5 Rarity</label></div>
-                <div class="col-75">
-            <input id="item5Rarity" type="text" v-model="item5Rarity" required> </div>
-            </div>   
-            <div class="row">
-                <div class="col-25">
-            <label for="item6Rarity">Item 6 Rarity</label></div>
-                <div class="col-75">
-            <input id="item6Rarity" type="text" v-model="item6Rarity" required> </div>
-            </div>   
-            <div class="row">
-                <div class="col-25">
-            <label for="item7Rarity">Item 7 Rarity</label></div>
-                <div class="col-75">
-            <input id="item7Rarity" type="text" v-model="item7Rarity" required> </div>
-            </div>   
-            <div class="row">
-                <div class="col-25">
-            <label for="item8Rarity">Item 8 Rarity</label></div>
-                <div class="col-75">
-            <input id="item8Rarity" type="text" v-model="item8Rarity" required> </div>
-            </div>   
-            <div class="row">
-                <div class="col-25">
-            <label for="item9Rarity">Item 9 Rarity</label></div>
-                <div class="col-75">
-            <input id="item9Rarity" type="text" v-model="item9Rarity" required> </div>
-            </div>   
-            <div class="row">
-                <div class="col-25">
-            <label for="item10Rarity">Item 10 Rarity</label></div>
-                <div class="col-75">
-            <input id="item10Rarity" type="text" v-model="item10Rarity" required> </div>
-            </div>   
-            <div class="row">
-                <div class="col-25">
-            <label for="gachaAmount">Amount of pulls in the machine</label></div>
-                <div class="col-75">
-            <input id="gachaAmount" type="text" v-model="gachaAmount" required> </div>
+                    <input id="gachaAmount" type="text" v-model="gachaAmount" required> 
+                </div>
             </div>  
+
             <div class="row">
-            <input type="submit" value="Add Gacha Machine">
+                <div class="col-50">
+                    <label for="name">Description of the Machine</label>
+                </div>
+                <div class="col-75">
+                <input id="name" type="text" v-model="description" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-50">
+                    <input type="submit" value="Add Gacha Machine">
+                </div>
             </div>  
         </form>
     </div>
@@ -95,7 +53,8 @@ export default {
         formSubmitHandler() {
             const newGachaMachine = {
                 name: this.name,
-                gachaAmount: this.gachaAmount
+                gachaAmount: this.gachaAmount,
+                description: this.description
             }
             fetch(API_URL, {method: 'POST', headers: {"Content-Type": "application/json"}, body: JSON.stringify(newGachaMachine)
             })
@@ -117,6 +76,7 @@ export default {
 <style>
 * {
   box-sizing: border-box;
+  color: green;
 }
 
 input[type=text], select, textarea {

@@ -1,17 +1,21 @@
 <template>
     <table>
         <caption> {{ caption }} </caption>
-        <tr>
+        <tr>            
             <th v-for="(keyName,index) in keyNames" :key="index">
-                {{ keyName }}
+                <span v-if="keyName!='Reward'">{{ keyName }}</span>
             </th>
             <th v-if="showControls"></th>
             <slot name="additionalHeaders"></slot>
         </tr>
         <tr v-for="item in items" :key="item.id">
-            <td v-for="(keyName,index) in Object.keys(item)" :key="index">
-                <span v-if="keyName=='itemImageLink'"><img :src="item[keyName]" alt="image gone"></span>
-                <span v-else>{{ item[keyName] }}</span>
+            
+            <td v-for="(keyName,index,) in Object.keys(item)" :key="index">
+                <div v-if="keyName!='Reward'"></div>
+                <span v-if="keyName!='Reward'">
+                    <span v-if="keyName=='ItemImageLink'"><img :src="item[keyName]" alt="image gone"></span>
+                    <span v-else>{{ item[keyName] }}</span>
+                </span>                
             </td>
             <td v-if="showControls">
                 <button @click="$emit('show', item)">Show</button>

@@ -7,12 +7,7 @@
       :showControls="true" 
       @show="gachaDetailId = $event.id"
       @delete="gachaToDelete = $event"
-      @rewards="rewardsToShow = $event.id">
-      <template #additionalColumns>
-        <td>
-          <button @click="$router.push(name='viewGacha', params={gachaId:})">nupp</button>
-        </td>
-      </template>
+      @rewards="navigateToRewards ($event.id)">
     </table-template>
     </div>
   <gacha-details 
@@ -36,6 +31,7 @@
   <script>
   import TableTemplate from '../components/Table.vue';
   import GachaDetails from '../components/GachaDetails.vue';
+  import Rewards from '../components/RewardDetails.vue';
   import { RouterLink } from 'vue-router';
   //import modal. why isnt it here?
   import Modal from '../components/Modal.vue';
@@ -44,13 +40,14 @@
     components: {
       GachaDetails,
       TableTemplate,
+      Rewards,
       RouterLink,
       Modal,
     }, 
     data() {
       return {
         gachas: [],
-        gachaDetailId: 0,    
+        gachaDetailId: 0, 
         gachaToDelete: {}
       };
     },
@@ -59,7 +56,7 @@
     },  
     methods: {
       async deleteGacha() {
-        fetch("http://localhost:8090/gachas" + this.gachaToDelete.id, {method: "delete", })
+        fetch("http://localhost:8090/gachas/" + this.gachaToDelete.id, {method: "delete", })
         .then(async(response) =>{
           if (response.status == 204) {
             this.gachas.splice(this.gachas.indexOf(this.gachaToDelete), 1);
@@ -69,9 +66,10 @@
             console.log("delete: ",data);}
         });
       },
-      onitemsclick() {
-        router.push({ name: 'user', params: { username: 'eduardo' } })
-      }
+      navigateToRewards(gachaDetailId) {
+        this.$router.push({name: "viewGacha", params: {gachaId: gachaDetailId}})
+        
+      },
 
     }
   };

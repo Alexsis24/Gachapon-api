@@ -1,13 +1,15 @@
 const { request } = require("express")
 const {db} = require("../db")
 const Gachas = db.gachas
+const Item = db.items
 
 exports.getAll = async (req, res)=>{
     const gachas = await Gachas.findAll({attributes:["id","name","gachaAmount","description"]})
     res.send(gachas)
 }
 exports.getById = async (req, res)=>{
-    const gachas = await Gachas.findByPk(req.params.gachasId)
+    /* const gachas = await Gachas.findByPk(req.params.gachasId, {include: { model: Item, attributes:  ["ItemName"]}}) */
+    const gachas = await Gachas.findByPk(req.params.gachasId, {include: { model: Item, attributes:  { exclude:["Reward"]}, required:false}})
     if (gachas === null) {
         res.status(404).send({"error":"Machine not found"})
         return
