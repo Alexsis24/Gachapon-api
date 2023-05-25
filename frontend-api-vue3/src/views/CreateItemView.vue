@@ -83,7 +83,7 @@
           .then((response) => response.json())
           .then((data) => {
             if (!data.error) {
-              this.$router.push("/");
+              this.$router.push("/allItems");
               return;
             }
             this.error = data.error;
@@ -98,6 +98,7 @@
   <style>
   * {
     box-sizing: border-box;
+    color: #45a049;
   }
   
   input[type="text"],

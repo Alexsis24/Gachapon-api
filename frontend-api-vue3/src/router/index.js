@@ -34,9 +34,10 @@ const router = createRouter({
       component: () => import("../views/AllItemsView.vue"),
     },
     {
-      path: "/addItems",
-      name: "addItems",
+      path: "/viewSingleItem/:itemId",
+      name: "viewSingleItem",
       component: () => import("../views/SpecificItemView.vue"),
+      props: route => { return { itemDetailId: Number(route.params.itemId)}}
     },
     {
       path: "/viewGacha/:gachaId",

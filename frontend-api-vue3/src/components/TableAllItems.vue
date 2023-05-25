@@ -14,7 +14,8 @@
       </tr>
       <tr v-for="item in items" :key="item.id">
         <td v-for="(keyName, index) in Object.keys(item)" :key="index">
-          {{ item[keyName] }}
+          <span v-if="keyName=='ItemImageLink'"><img :src="item[keyName]" alt="image gone"></span>
+                    <span v-else>{{ item[keyName] }}</span>
         </td>
         <td v-if="showControls">
           <button @click="$emit('show', item)">Show</button>

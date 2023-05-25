@@ -1,37 +1,22 @@
 <template>
     <div>
-    <router-link to="/addItem">Add new Item</router-link>
     <table-template 
-      caption="All items"
+      caption="This item"
       :items="items" 
-      :showControls="true" 
-      @show="itemDetailId = $event.id"
-      @delete="itemToDelete = $event">
+      :showControls="false">
     </table-template>
     </div>
   <item-details 
     :itemDetailId = "itemDetailId"
     @close="itemDetailId = 0">
   </item-details>
-  <modal :show="JSON.stringify(itemToDelete) !== '{}'">
-  <template #header>
-  <h3>Delete item</h3>
-  </template>
-  <template #body>
-      <p>Are you sure you want to delete?</p>
-    </template>
-    <template #footer>
-      <button class="modal-default-button" @click="deleteItem()">yes</button>
-      <button class="modal-default-button" @click="itemToDelete = {}">No</button>
-    </template>
-  </modal>
   </template>
   
   <script>
-  import TableTemplate from '../components/TableMachine.vue';
+  import TableTemplate from '../components/Table.vue';
   import ItemDetails from '../components/ItemDetails.vue';
-  import Modal from '../components/Modal.vue';
   import { RouterLink } from 'vue-router';
+  import Modal from '../components/Modal.vue';
   
   export default {
     components: {
@@ -64,6 +49,10 @@
           console.log("DELETE: ", data);
         }
       });
+    },
+    navigateToItems(itemDetailId) {
+      this.$router.push({name: "viewSingleItem", params: {itemId: itemDetailId}});
+      
     },
   },
   };
